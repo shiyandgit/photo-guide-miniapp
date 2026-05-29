@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "guide-card": "/components/guide-card/guide-card"
+  },
+  "enablePullDownRefresh": true
+}

@@ -1,0 +1,90 @@
+<view class="container">
+  <view class="form-card">
+    <!-- 标题 -->
+    <view class="form-item">
+      <view class="form-label">标题 <text class="required">*</text></view>
+      <input class="form-input" placeholder="请输入攻略标题（2-30字）" value="{{title}}" bindinput="onTitleInput" maxlength="30" />
+    </view>
+
+    <!-- 内容类型 -->
+    <view class="form-item">
+      <view class="form-label">内容类型 <text class="required">*</text></view>
+      <view class="radio-group">
+        <view class="radio-item {{contentType === 1 ? 'active' : ''}}" bindtap="setContentType" data-type="1">
+          专业学习
+        </view>
+        <view class="radio-item {{contentType === 2 ? 'active' : ''}}" bindtap="setContentType" data-type="2">
+          应急技巧
+        </view>
+      </view>
+    </view>
+
+    <!-- 场景标签 -->
+    <view class="form-item">
+      <view class="form-label">场景标签</view>
+      <view class="tag-group">
+        <view class="tag-item {{item.selected ? 'active' : ''}}" wx:for="{{sceneTags}}" wx:key="name"
+              bindtap="toggleSceneTag" data-index="{{index}}">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 难度等级 -->
+    <view class="form-item">
+      <view class="form-label">难度等级 <text class="required">*</text></view>
+      <view class="radio-group">
+        <view class="radio-item {{difficulty === 1 ? 'active' : ''}}" bindtap="setDifficulty" data-level="1">
+          新手入门
+        </view>
+        <view class="radio-item {{difficulty === 2 ? 'active' : ''}}" bindtap="setDifficulty" data-level="2">
+          进阶技巧
+        </view>
+        <view class="radio-item {{difficulty === 3 ? 'active' : ''}}" bindtap="setDifficulty" data-level="3">
+          专业玩法
+        </view>
+      </view>
+    </view>
+
+    <!-- 正文 -->
+    <view class="form-item">
+      <view class="form-label">正文内容 <text class="required">*</text></view>
+      <textarea class="form-textarea" placeholder="请输入攻略内容（至少50字）" value="{{content}}"
+                bindinput="onContentInput" maxlength="10000" />
+      <view class="word-count">{{content.length}}/10000</view>
+    </view>
+
+    <!-- 封面图 -->
+    <view class="form-item">
+      <view class="form-label">封面图 <text class="required">*</text></view>
+      <view class="upload-area" bindtap="chooseCover">
+        <image wx:if="{{coverImage}}" src="{{coverImage}}" mode="aspectFill" class="cover-preview" />
+        <view wx:else class="upload-placeholder">
+          <text class="upload-icon">+</text>
+          <text class="upload-text">选择封面图</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 配图 -->
+    <view class="form-item">
+      <view class="form-label">配图（可选）</view>
+      <view class="image-list">
+        <view class="image-item" wx:for="{{images}}" wx:key="*this">
+          <image src="{{item}}" mode="aspectFill" class="image-preview" />
+          <view class="image-delete" catchtap="deleteImage" data-index="{{index}}">×</view>
+        </view>
+        <view class="image-add" bindtap="addImage" wx:if="{{images.length < 9}}">
+          <text class="upload-icon">+</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-bar safe-area-bottom">
+    <button class="btn-primary" bindtap="submit" disabled="{{submitting}}" loading="{{submitting}}">
+      {{submitting ? '提交中...' : '提交审核'}}
+    </button>
+  </view>
+</view>

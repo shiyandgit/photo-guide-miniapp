@@ -1,0 +1,26 @@
+<view class="container">
+  <view class="guide-list">
+    <view class="guide-item" wx:for="{{guides}}" wx:key="_id" bindtap="goDetail" data-id="{{item._id}}">
+      <image class="guide-cover" src="{{item.coverImage}}" mode="aspectFill" />
+      <view class="guide-info">
+        <text class="guide-title">{{item.title}}</text>
+        <view class="guide-status status-{{item.status}}">
+          {{item.status === 0 ? '待审核' : item.status === 1 ? '已通过' : '已驳回'}}
+        </view>
+        <view class="guide-reason" wx:if="{{item.status === 2 && item.rejectReason}}">
+          驳回原因：{{item.rejectReason}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && guides.length === 0}}">
+    <text class="empty-icon">📝</text>
+    <text class="empty-text">暂无投稿</text>
+    <button class="btn-primary" bindtap="goContribute">去投稿</button>
+  </view>
+</view>

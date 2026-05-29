@@ -1,0 +1,14 @@
+<view class="guide-card" bindtap="onTap">
+  <image class="card-cover" src="{{guide.coverImage}}" mode="aspectFill" />
+  <view class="card-info">
+    <text class="card-title">{{guide.title}}</text>
+    <view class="card-tags">
+      <view class="card-tag {{guide.contentType === 1 ? 'tag-primary' : 'tag-orange'}}">
+        {{guide.contentType === 1 ? '专业学习' : '应急技巧'}}
+      </view>
+    </view>
+    <view class="card-meta">
+      <text class="card-stat">❤️ {{guide.favoriteCount || 0}}</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,65 @@
+.guide-card {
+  display: flex;
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+
+.card-cover {
+  width: 240rpx;
+  height: 180rpx;
+  flex-shrink: 0;
+}
+
+.card-info {
+  flex: 1;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+.card-tags {
+  margin-top: 12rpx;
+}
+
+.card-tag {
+  display: inline-block;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+}
+
+.tag-primary {
+  background-color: rgba(255, 107, 107, 0.1);
+  color: #FF6B6B;
+}
+
+.tag-orange {
+  background-color: rgba(255, 152, 0, 0.1);
+  color: #FF9800;
+}
+
+.card-meta {
+  margin-top: 12rpx;
+  display: flex;
+  align-items: center;
+}
+
+.card-stat {
+  font-size: 24rpx;
+  color: #999;
+}
