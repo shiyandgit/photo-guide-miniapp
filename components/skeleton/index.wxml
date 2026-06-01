@@ -21,6 +21,7 @@
       <view class="skel skel-line" style="width: 85%"></view>
     </view>
   </view>
+
   <view class="skeleton-home" wx:if="{{type === 'home'}}">
     <view class="skel-search-bar">
       <view class="skel skel-search-input"></view>
@@ -44,6 +45,7 @@
       </view>
     </view>
   </view>
+
   <view class="skeleton-list" wx:if="{{type === 'list'}}">
     <view class="skel-guide-card" wx:for="{{count || 3}}" wx:key="*this">
       <view class="skel skel-guide-cover"></view>

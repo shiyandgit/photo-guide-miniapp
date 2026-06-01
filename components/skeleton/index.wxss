@@ -1,22 +1,142 @@
-.skeleton { animation: fadeIn 0.2s ease; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-.skel { background: linear-gradient(90deg, #eee 25%, #f5f5f5 37%, #eee 63%); background-size: 200% 100%; animation: shimmer 1.4s ease infinite; border-radius: 8rpx; }
-@keyframes shimmer { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
-.skel-line { height: 28rpx; margin-bottom: 16rpx; border-radius: 6rpx; }
-.skel-title { height: 40rpx; width: 60%; margin-bottom: 20rpx; border-radius: 8rpx; }
-.skel-tag { width: 120rpx; height: 44rpx; border-radius: 22rpx; margin-right: 12rpx; }
-.skel-tags { display: flex; margin-top: 8rpx; }
-.skel-circle { width: 88rpx; height: 88rpx; border-radius: 50%; }
-.skel-gap { height: 20rpx; }
-.skel-card { background: #fff; margin: 20rpx; border-radius: 16rpx; padding: 30rpx; }
-.skel-cover { width: 100%; height: 400rpx; border-radius: 0; }
-.skel-search-bar { padding: 24rpx; background: linear-gradient(135deg, #4A90D9 0%, #7CB9E8 100%); }
-.skel-search-input { height: 76rpx; border-radius: 40rpx; background: rgba(255, 255, 255, 0.3); }
-.skel-banner { height: 320rpx; margin: 20rpx; border-radius: 16rpx; }
-.skel-grid { display: flex; flex-wrap: wrap; padding: 20rpx 10rpx; background: #fff; margin: 20rpx; border-radius: 16rpx; }
-.skel-grid-item { width: 25%; display: flex; flex-direction: column; align-items: center; padding: 20rpx 0; }
-.skel-grid-text { width: 64rpx; height: 24rpx; margin-top: 8rpx; border-radius: 4rpx; }
-.skel-section-title { padding: 20rpx 20rpx 0; }
-.skel-guide-card { display: flex; background: #fff; margin: 10rpx 20rpx; border-radius: 16rpx; padding: 20rpx; gap: 20rpx; }
-.skel-guide-cover { width: 240rpx; height: 180rpx; border-radius: 12rpx; flex-shrink: 0; }
-.skel-guide-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+/* 骨架屏基础样式 */
+.skeleton {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.skel {
+  background: linear-gradient(90deg, #eee 25%, #f5f5f5 37%, #eee 63%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 8rpx;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+/* 基础块 */
+.skel-line {
+  height: 28rpx;
+  margin-bottom: 16rpx;
+  border-radius: 6rpx;
+}
+
+.skel-title {
+  height: 40rpx;
+  width: 60%;
+  margin-bottom: 20rpx;
+  border-radius: 8rpx;
+}
+
+.skel-tag {
+  width: 120rpx;
+  height: 44rpx;
+  border-radius: 22rpx;
+  margin-right: 12rpx;
+}
+
+.skel-tags {
+  display: flex;
+  margin-top: 8rpx;
+}
+
+.skel-circle {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+}
+
+.skel-gap {
+  height: 20rpx;
+}
+
+/* 卡片 */
+.skel-card {
+  background: #fff;
+  margin: 20rpx;
+  border-radius: 16rpx;
+  padding: 30rpx;
+}
+
+/* === 详情页骨架 === */
+.skel-cover {
+  width: 100%;
+  height: 400rpx;
+  border-radius: 0;
+}
+
+/* === 首页骨架 === */
+.skel-search-bar {
+  padding: 24rpx;
+  background: linear-gradient(135deg, #4A90D9 0%, #7CB9E8 100%);
+}
+
+.skel-search-input {
+  height: 76rpx;
+  border-radius: 40rpx;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.skel-banner {
+  height: 320rpx;
+  margin: 20rpx;
+  border-radius: 16rpx;
+}
+
+.skel-grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20rpx 10rpx;
+  background: #fff;
+  margin: 20rpx;
+  border-radius: 16rpx;
+}
+
+.skel-grid-item {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.skel-grid-text {
+  width: 64rpx;
+  height: 24rpx;
+  margin-top: 8rpx;
+  border-radius: 4rpx;
+}
+
+.skel-section-title {
+  padding: 20rpx 20rpx 0;
+}
+
+/* === 列表卡片骨架 === */
+.skel-guide-card {
+  display: flex;
+  background: #fff;
+  margin: 10rpx 20rpx;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  gap: 20rpx;
+}
+
+.skel-guide-cover {
+  width: 240rpx;
+  height: 180rpx;
+  border-radius: 12rpx;
+  flex-shrink: 0;
+}
+
+.skel-guide-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
