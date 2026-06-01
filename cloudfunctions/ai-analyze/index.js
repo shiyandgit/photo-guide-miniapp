@@ -20,10 +20,12 @@ exports.main = async (event, context) => {
   }
 }
 
+// AI分析照片
 async function analyzePhoto(openid, data) {
   try {
     const { fileID, scene } = data
 
+    // 获取用户配置的API Key
     const userRes = await db.collection('users').where({
       openid: openid
     }).get()
@@ -34,6 +36,10 @@ async function analyzePhoto(openid, data) {
 
     const user = userRes.data[0]
     const apiKeys = user.apiKeys || {}
+
+    // 这里应该调用实际的AI API（如豆包、通义千问等）
+    // 由于云函数环境限制，这里返回模拟数据
+    // 实际使用时需要配置HTTP请求调用AI API
 
     const mockResult = {
       scene: scene || '通用场景',
@@ -46,6 +52,7 @@ async function analyzePhoto(openid, data) {
       aiModel: '模拟分析 (Mock)'
     }
 
+    // 保存分析记录
     await db.collection('ai_records').add({
       data: {
         openid: openid,
@@ -62,6 +69,7 @@ async function analyzePhoto(openid, data) {
   }
 }
 
+// 获取分析历史
 async function getAnalysisHistory(openid) {
   try {
     const res = await db.collection('ai_records')
