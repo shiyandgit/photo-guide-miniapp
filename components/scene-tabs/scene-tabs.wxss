@@ -1,4 +1,25 @@
-.scene-tabs { white-space: nowrap; background-color: #fff; padding: 16rpx 0; }
-.tab-list { display: inline-flex; padding: 0 16rpx; gap: 16rpx; }
-.tab-item { display: inline-block; padding: 12rpx 24rpx; border-radius: 30rpx; font-size: 26rpx; color: #666; background-color: #F0F4F8; }
-.tab-item.active { background-color: #4A90D9; color: #fff; }
+.scene-tabs {
+  white-space: nowrap;
+  background-color: #fff;
+  padding: 16rpx 0;
+}
+
+.tab-list {
+  display: inline-flex;
+  padding: 0 16rpx;
+  gap: 16rpx;
+}
+
+.tab-item {
+  display: inline-block;
+  padding: 12rpx 24rpx;
+  border-radius: 30rpx;
+  font-size: 26rpx;
+  color: #666;
+  background-color: #F0F4F8;
+}
+
+.tab-item.active {
+  background-color: #4A90D9;
+  color: #fff;
+}
