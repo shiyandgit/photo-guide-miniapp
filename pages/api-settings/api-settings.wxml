@@ -1,0 +1,99 @@
+<view class="container">
+  <!-- 当前状态 -->
+  <view class="status-card">
+    <view class="status-title">API Key 状态</view>
+    <view class="status-content" wx:if="{{hasKey}}">
+      <view class="status-icon active">✓</view>
+      <view class="status-info">
+        <text class="status-platform">{{platformName}}</text>
+        <text class="status-key">{{maskedKey}}</text>
+      </view>
+      <view class="status-badge active">已激活</view>
+    </view>
+    <view class="status-content" wx:else>
+      <view class="status-icon">-</view>
+      <view class="status-info">
+        <text class="status-text">暂未配置 API Key</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 配置表单 -->
+  <view class="form-card" wx:if="{{!hasKey || showForm}}">
+    <view class="form-title">{{hasKey ? '更换 API Key' : '配置 API Key'}}</view>
+
+    <!-- 平台选择 -->
+    <view class="form-label">选择平台</view>
+    <view class="platform-list">
+      <view class="platform-item {{selectedPlatform === 'doubao' ? 'active' : ''}}"
+            bindtap="selectPlatform" data-platform="doubao">
+        <view class="platform-icon">🐱</view>
+        <view class="platform-info">
+          <text class="platform-name">豆包</text>
+          <text class="platform-desc">字节跳动旗下，免费额度充足</text>
+        </view>
+      </view>
+      <view class="platform-item {{selectedPlatform === 'tongyi' ? 'active' : ''}}"
+            bindtap="selectPlatform" data-platform="tongyi">
+        <view class="platform-icon">🐶</view>
+        <view class="platform-info">
+          <text class="platform-name">通义千问</text>
+          <text class="platform-desc">阿里云旗下，视觉理解能力强</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- API Key 输入 -->
+    <view class="form-label">API Key</view>
+    <view class="input-wrapper">
+      <input class="form-input" type="password" placeholder="请输入 API Key"
+             value="{{apiKey}}" bindinput="onKeyInput" />
+    </view>
+
+    <!-- 按钮 -->
+    <button class="btn-primary" bindtap="verifyAndSave"
+            disabled="{{!selectedPlatform || !apiKey || verifying}}" loading="{{verifying}}">
+      {{verifying ? '验证中...' : '验证并保存'}}
+    </button>
+
+    <!-- 错误提示 -->
+    <view class="error-tip" wx:if="{{errorMsg}}">{{errorMsg}}</view>
+  </view>
+
+  <!-- 已配置后的操作 -->
+  <view class="action-card" wx:if="{{hasKey && !showForm}}">
+    <button class="btn-outline" bindtap="showChangeForm">更换 Key</button>
+    <button class="btn-danger" bindtap="deleteKey">删除 Key</button>
+  </view>
+
+  <!-- 教程区域 -->
+  <view class="tutorial-card">
+    <view class="tutorial-title">如何获取 API Key？</view>
+
+    <view class="tutorial-item" bindtap="toggleTutorial" data-provider="doubao">
+      <view class="tutorial-header">
+        <text class="tutorial-name">豆包 API Key 获取教程</text>
+        <text class="tutorial-arrow">{{showDoubaoTutorial ? '∧' : '∨'}}</text>
+      </view>
+      <view class="tutorial-content" wx:if="{{showDoubaoTutorial}}">
+        <rich-text nodes="{{doubaoTutorial}}" />
+      </view>
+    </view>
+
+    <view class="tutorial-item" bindtap="toggleTutorial" data-provider="tongyi">
+      <view class="tutorial-header">
+        <text class="tutorial-name">通义千问 API Key 获取教程</text>
+        <text class="tutorial-arrow">{{showTongyiTutorial ? '∧' : '∨'}}</text>
+      </view>
+      <view class="tutorial-content" wx:if="{{showTongyiTutorial}}">
+        <rich-text nodes="{{tongyiTutorial}}" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部说明 -->
+  <view class="footer-note">
+    <text>您的 API Key 经加密后存储在服务器，不会泄露</text>
+    <text>系统不会记录或使用您的 API Key 进行任何非您发起的操作</text>
+  </view>
+</view>

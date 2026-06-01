@@ -1,0 +1,146 @@
+.container {
+  min-height: 100vh;
+  background-color: #F0F4F8;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+}
+
+.header-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.refresh-btn {
+  font-size: 26rpx;
+  color: #4A90D9;
+  padding: 10rpx 24rpx;
+  border: 1rpx solid #4A90D9;
+  border-radius: 30rpx;
+}
+
+.guide-list {
+  padding: 0 20rpx 20rpx;
+}
+
+.guide-item {
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+}
+
+.guide-main {
+  display: flex;
+  padding: 20rpx;
+}
+
+.guide-cover {
+  width: 160rpx;
+  height: 120rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+}
+
+.guide-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.guide-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.guide-meta {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.guide-author {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.guide-status {
+  font-size: 22rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.status-pending {
+  background-color: rgba(255, 152, 0, 0.1);
+  color: #FF9800;
+}
+
+.status-approved {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+}
+
+.status-rejected {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+}
+
+.guide-actions {
+  display: flex;
+  border-top: 1rpx solid #F0F4F8;
+}
+
+.action-view,
+.action-delete {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 26rpx;
+}
+
+.action-view {
+  color: #4A90D9;
+  border-right: 1rpx solid #F0F4F8;
+}
+
+.action-delete {
+  color: #f44336;
+}
+
+.loading {
+  text-align: center;
+  padding: 100rpx 0;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100rpx 0;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+}
