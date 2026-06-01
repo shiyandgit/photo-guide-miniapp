@@ -1,36 +1,78 @@
-const showLoading = (title = '加载中...') => {
-  wx.showLoading({ title, mask: true })
-}
-
-const hideLoading = () => {
-  wx.hideLoading()
-}
-
-const showSuccess = (title) => {
-  wx.showToast({ title, icon: 'success' })
-}
-
-const showError = (title) => {
-  wx.showToast({ title: typeof title === 'string' ? title : '操作失败', icon: 'none' })
-}
-
+// 格式化时间
 const formatTime = (date) => {
-  const d = new Date(date)
-  const year = d.getFullYear()
-  const month = (d.getMonth() + 1).toString().padStart(2, '0')
-  const day = d.getDate().toString().padStart(2, '0')
-  return `${year}-${month}-${day}`
-}
-
-const throttle = (fn, delay = 300) => {
-  let timer = null
-  return function (...args) {
-    if (timer) return
-    timer = setTimeout(() => {
-      fn.apply(this, args)
-      timer = null
-    }, delay)
+  if (!date) return '';
+  if (typeof date === 'string') {
+    date = new Date(date);
   }
-}
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minute = date.getMinutes();
 
-module.exports = { showLoading, hideLoading, showSuccess, showError, formatTime, throttle }
+  return `${year}-${padZero(month)}-${padZero(day)} ${padZero(hour)}:${padZero(minute)}`;
+};
+
+const padZero = (num) => {
+  return num < 10 ? '0' + num : '' + num;
+};
+
+// 防抖函数
+const debounce = (fn, delay = 500) => {
+  let timer = null;
+  return function (...args) {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  };
+};
+
+// 图片预览
+const previewImages = (urls, current) => {
+  wx.previewImage({
+    current: current || urls[0],
+    urls: urls
+  });
+};
+
+// 显示成功提示
+const showSuccess = (title = '操作成功') => {
+  wx.showToast({
+    title,
+    icon: 'success',
+    duration: 2000
+  });
+};
+
+// 显示错误提示
+const showError = (title = '操作失败') => {
+  wx.showToast({
+    title,
+    icon: 'none',
+    duration: 2000
+  });
+};
+
+// 显示加载中
+const showLoading = (title = '加载中...') => {
+  wx.showLoading({
+    title,
+    mask: true
+  });
+};
+
+// 隐藏加载中
+const hideLoading = () => {
+  wx.hideLoading();
+};
+
+module.exports = {
+  formatTime,
+  debounce,
+  previewImages,
+  showSuccess,
+  showError,
+  showLoading,
+  hideLoading
+};

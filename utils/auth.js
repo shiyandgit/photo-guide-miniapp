@@ -1,27 +1,37 @@
-const app = getApp()
+const app = getApp();
 
-const checkLogin = () => {
-  const userInfo = app.globalData.userInfo || wx.getStorageSync('userInfo')
-  return !!userInfo
-}
+// 登录
+const login = () => {
+  return app.login();
+};
 
-const requireLogin = (callback) => {
-  if (checkLogin()) {
-    callback && callback()
-    return true
-  }
+// 获取 Token
+const getToken = () => {
+  return wx.getStorageSync('token');
+};
 
-  wx.showModal({
-    title: '提示',
-    content: '请先登录',
-    confirmText: '去登录',
-    success: (res) => {
-      if (res.confirm) {
-        wx.switchTab({ url: '/pages/mine/mine' })
-      }
-    }
-  })
-  return false
-}
+// 是否已登录
+const isLoggedIn = () => {
+  return !!wx.getStorageSync('token');
+};
 
-module.exports = { checkLogin, requireLogin }
+// 退出登录
+const logout = () => {
+  wx.removeStorageSync('token');
+  wx.removeStorageSync('userInfo');
+  app.globalData.token = null;
+  app.globalData.userInfo = null;
+};
+
+// 获取用户信息
+const getUserInfo = () => {
+  return wx.getStorageSync('userInfo');
+};
+
+module.exports = {
+  login,
+  getToken,
+  isLoggedIn,
+  logout,
+  getUserInfo
+};

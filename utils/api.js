@@ -1,11 +1,15 @@
 const app = getApp()
 
+// 调用云函数
 const callFunction = (name, action, data = {}) => {
   return new Promise((resolve, reject) => {
     console.log(`[API] 调用云函数: ${name}, action: ${action}`, data)
     wx.cloud.callFunction({
       name: name,
-      data: { action: action, data: data },
+      data: {
+        action: action,
+        data: data
+      },
       success: (res) => {
         console.log(`[API] ${name}.${action} 返回:`, JSON.stringify(res.result))
         if (res.result && res.result.code === 200) {
@@ -23,6 +27,7 @@ const callFunction = (name, action, data = {}) => {
   })
 }
 
+// 用户相关
 const user = {
   login: () => callFunction('user', 'login'),
   getUserInfo: () => callFunction('user', 'getUserInfo'),
@@ -31,6 +36,7 @@ const user = {
   deleteApiKey: () => callFunction('user', 'deleteApiKey')
 }
 
+// 攻略相关
 const guide = {
   getHot: (limit = 10) => callFunction('guide', 'getHotGuides', { limit }),
   getDetail: (guideId) => callFunction('guide', 'getGuideDetail', { guideId }),
@@ -48,20 +54,32 @@ const guide = {
   adminDeleteGuide: (guideId) => callFunction('guide', 'deleteGuide', { guideId })
 }
 
+// AI分析相关
 const ai = {
   analyzePhoto: (fileID, scene) => callFunction('ai-analyze', 'analyzePhoto', { fileID, scene }),
   getHistory: () => callFunction('ai-analyze', 'getAnalysisHistory')
 }
 
+// 上传文件到云存储
 const uploadFile = (filePath, cloudPath) => {
   return new Promise((resolve, reject) => {
     wx.cloud.uploadFile({
       cloudPath: cloudPath,
       filePath: filePath,
-      success: (res) => { resolve(res.fileID) },
-      fail: (err) => { reject(err.errMsg || '上传失败') }
+      success: (res) => {
+        resolve(res.fileID)
+      },
+      fail: (err) => {
+        reject(err.errMsg || '上传失败')
+      }
     })
   })
 }
 
-module.exports = { callFunction, user, guide, ai, uploadFile }
+module.exports = {
+  callFunction,
+  user,
+  guide,
+  ai,
+  uploadFile
+}

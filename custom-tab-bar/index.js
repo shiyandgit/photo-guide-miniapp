@@ -8,6 +8,7 @@ Component({
       { pagePath: '/pages/mine/mine', icon: '👤', text: '我的' }
     ]
   },
+
   methods: {
     switchTab(e) {
       const { index, path } = e.currentTarget.dataset
