@@ -43,15 +43,13 @@ async function analyzePhoto(openid, data) {
 
     const mockResult = {
       scene: scene || '通用场景',
-      suggestions: [
-        '建议使用三分法构图，将主体放在交叉点上',
-        '光线角度可以调整，避免逆光造成主体过暗',
-        '背景可以适当虚化，突出主体'
-      ],
       score: 75,
       composition: '三分法',
       lighting: '自然光',
-      style: '日系清新'
+      style: '日系清新',
+      suggestionText: '1. 构图建议：建议使用三分法构图，将主体放在画面的交叉点上，可以让画面更加平衡和有层次感。\n\n2. 光线建议：当前光线角度可以调整，避免逆光造成主体过暗。建议在黄金时刻（日出后/日落前1小时）拍摄。\n\n3. 背景建议：背景可以适当虚化，突出主体。可以尝试使用人像模式或大光圈拍摄。',
+      promptText: 'A beautiful photograph with natural lighting, soft bokeh background, golden hour warmth, rule of thirds composition, cinematic color grading, shallow depth of field, professional photography style',
+      aiModel: '模拟分析 (Mock)'
     }
 
     // 保存分析记录

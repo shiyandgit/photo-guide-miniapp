@@ -8,8 +8,8 @@
   </view>
 
   <view class="empty" wx:if="{{!loading && guides.length === 0}}">
-    <text class="empty-icon">❤️</text>
-    <text class="empty-text">暂无收藏</text>
+    <text class="empty-icon">🐱</text>
+    <text class="empty-text">暂无收藏，喵~</text>
   </view>
 
   <view class="no-more" wx:if="{{!loading && noMore && guides.length > 0}}">

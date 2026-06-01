@@ -84,7 +84,7 @@
   <!-- 提交按钮 -->
   <view class="submit-bar safe-area-bottom">
     <button class="btn-primary" bindtap="submit" disabled="{{submitting}}" loading="{{submitting}}">
-      {{submitting ? '提交中...' : '提交审核'}}
+      {{submitting ? '保存中...' : editMode ? '保存修改' : '发布攻略'}}
     </button>
   </view>
 </view>

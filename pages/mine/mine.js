@@ -2,14 +2,39 @@ const api = require('../../utils/api')
 const util = require('../../utils/util')
 const app = getApp()
 
+const ADMIN_OPENID = 'ohA1n3V1p4S_Ih1q9-FX8FonG9hY'
+
 Page({
   data: {
     isLoggedIn: false,
+    isAdmin: false,
     userInfo: {}
   },
 
   onShow() {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({ selected: 3 })
+    }
     this.checkLoginStatus()
+  },
+
+  async showOpenId() {
+    try {
+      const res = await api.guide.getMyOpenId()
+      wx.setClipboardData({
+        data: res.openid,
+        success: () => {
+          wx.showModal({
+            title: '你的 OpenID',
+            content: res.openid,
+            showCancel: false,
+            confirmText: '已复制'
+          })
+        }
+      })
+    } catch (err) {
+      util.showError('获取失败')
+    }
   },
 
   checkLoginStatus() {
@@ -18,6 +43,18 @@ Page({
       isLoggedIn: !!userInfo,
       userInfo: userInfo || {}
     })
+    if (userInfo) {
+      this.checkAdmin()
+    }
+  },
+
+  async checkAdmin() {
+    try {
+      const res = await api.guide.getMyOpenId()
+      this.setData({ isAdmin: res.openid === ADMIN_OPENID })
+    } catch (err) {
+      this.setData({ isAdmin: false })
+    }
   },
 
   async login() {
@@ -28,6 +65,7 @@ Page({
         isLoggedIn: true,
         userInfo: data
       })
+      this.checkAdmin()
       util.showSuccess('登录成功')
     } catch (err) {
       util.showError(err)
@@ -73,6 +111,7 @@ Page({
           app.globalData.userInfo = null
           this.setData({
             isLoggedIn: false,
+            isAdmin: false,
             userInfo: {}
           })
           util.showSuccess('已退出登录')

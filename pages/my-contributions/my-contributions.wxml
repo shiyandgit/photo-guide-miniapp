@@ -1,15 +1,21 @@
 <view class="container">
   <view class="guide-list">
-    <view class="guide-item" wx:for="{{guides}}" wx:key="_id" bindtap="goDetail" data-id="{{item._id}}">
-      <image class="guide-cover" src="{{item.coverImage}}" mode="aspectFill" />
-      <view class="guide-info">
-        <text class="guide-title">{{item.title}}</text>
-        <view class="guide-status status-{{item.status}}">
-          {{item.status === 0 ? '待审核' : item.status === 1 ? '已通过' : '已驳回'}}
+    <view class="guide-item" wx:for="{{guides}}" wx:key="_id">
+      <view class="guide-main" bindtap="goDetail" data-id="{{item._id}}">
+        <image class="guide-cover" src="{{item.coverImage}}" mode="aspectFill" />
+        <view class="guide-info">
+          <text class="guide-title">{{item.title}}</text>
+          <view class="guide-status status-{{item.status}}">
+            {{item.status === 'approved' ? '已通过' : item.status === 'pending' ? '待审核' : '已驳回'}}
+          </view>
+          <view class="guide-reason" wx:if="{{item.status === 'rejected' && item.rejectReason}}">
+            驳回原因：{{item.rejectReason}}
+          </view>
         </view>
-        <view class="guide-reason" wx:if="{{item.status === 2 && item.rejectReason}}">
-          驳回原因：{{item.rejectReason}}
-        </view>
+      </view>
+      <view class="guide-actions">
+        <view class="action-edit" bindtap="editGuide" data-id="{{item._id}}">编辑</view>
+        <view class="action-delete" bindtap="deleteGuide" data-id="{{item._id}}" data-title="{{item.title}}">删除</view>
       </view>
     </view>
   </view>
@@ -19,7 +25,7 @@
   </view>
 
   <view class="empty" wx:if="{{!loading && guides.length === 0}}">
-    <text class="empty-icon">📝</text>
+    <text class="empty-icon">🐾</text>
     <text class="empty-text">暂无投稿</text>
     <button class="btn-primary" bindtap="goContribute">去投稿</button>
   </view>

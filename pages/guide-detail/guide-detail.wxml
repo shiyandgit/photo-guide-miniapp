@@ -1,12 +1,24 @@
 <view class="container">
+  <!-- 骨架屏 -->
+  <skeleton loading="{{loading && !guide._id}}" type="detail" />
+
   <!-- 封面图 -->
-  <view class="cover-wrapper">
-    <image class="cover-image" src="{{guide.coverImage}}" mode="aspectFill" bindtap="previewCover" />
+  <view class="cover-wrapper" wx:if="{{guide._id}}">
+    <image wx:if="{{guide.coverImage}}" class="cover-image" src="{{guide.coverImage}}" mode="aspectFill" bindtap="previewCover" />
+    <view wx:else class="cover-image cover-fallback" style="background: {{guide.coverColor || '#4A90D9'}};">
+      <text class="cover-scene">{{guide.scene}}</text>
+      <text class="cover-title">{{guide.title}}</text>
+    </view>
+  </view>
+
+  <view class="notice" wx:if="{{errorMessage && guide._id}}">
+    <text>{{errorMessage}}</text>
   </view>
 
   <!-- 基本信息 -->
-  <view class="info-card">
+  <view class="info-card" wx:if="{{guide._id}}">
     <view class="title">{{guide.title}}</view>
+    <view class="summary" wx:if="{{guide.summary}}">{{guide.summary}}</view>
 
     <!-- 标签 -->
     <view class="tags">
@@ -40,14 +52,14 @@
   </view>
 
   <!-- 正文内容 -->
-  <view class="content-card">
-    <view class="content-title">攻略详情</view>
+  <view class="content-card" wx:if="{{guide._id}}">
+    <view class="content-title">📖 攻略详情</view>
     <rich-text class="content-body" nodes="{{guide.content}}" />
   </view>
 
   <!-- 配图 -->
-  <view class="images-card" wx:if="{{guide.images && guide.images.length > 0}}">
-    <view class="content-title">参考图片</view>
+  <view class="images-card" wx:if="{{guide._id && guide.images && guide.images.length > 0}}">
+    <view class="content-title">🖼️ 参考图片</view>
     <view class="image-grid">
       <image wx:for="{{guide.images}}" wx:key="*this" src="{{item}}"
              mode="aspectFill" class="grid-image" bindtap="previewImage" data-url="{{item}}" />
@@ -55,7 +67,7 @@
   </view>
 
   <!-- 底部操作栏 -->
-  <view class="bottom-bar safe-area-bottom">
+  <view class="bottom-bar safe-area-bottom" wx:if="{{guide._id}}">
     <view class="action-btn {{isFavorited ? 'favorited' : ''}}" bindtap="toggleFavorite">
       <text class="action-icon">{{isFavorited ? '❤️' : '🤍'}}</text>
       <text class="action-text">{{isFavorited ? '已收藏' : '收藏'}}</text>

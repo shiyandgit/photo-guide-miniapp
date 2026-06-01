@@ -9,17 +9,19 @@
         "pages/my-favorites/my-favorites",
         "pages/my-history/my-history",
         "pages/my-contributions/my-contributions",
-        "pages/api-settings/api-settings"
+        "pages/api-settings/api-settings",
+        "pages/admin/admin"
     ],
     "window": {
         "navigationBarTitleText": "摄影苦手",
-        "navigationBarBackgroundColor": "#FF6B6B",
+        "navigationBarBackgroundColor": "#4A90D9",
         "navigationBarTextStyle": "white",
-        "backgroundColor": "#F5F5F5"
+        "backgroundColor": "#F0F4F8"
     },
     "tabBar": {
+        "custom": true,
         "color": "#999999",
-        "selectedColor": "#FF6B6B",
+        "selectedColor": "#4A90D9",
         "backgroundColor": "#ffffff",
         "borderStyle": "black",
         "list": [

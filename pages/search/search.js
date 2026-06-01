@@ -1,5 +1,6 @@
 const api = require('../../utils/api')
 const util = require('../../utils/util')
+const sampleData = require('../../utils/sample-data')
 
 Page({
   data: {
@@ -12,6 +13,7 @@ Page({
     searched: false,
     loading: false,
     noMore: false,
+    errorMessage: '',
     hotKeywords: ['日落', '咖啡馆', '街头', '海滩', '花海', '夜景'],
     searchHistory: []
   },
@@ -26,6 +28,9 @@ Page({
   },
 
   onShow() {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({ selected: 1 })
+    }
     const app = getApp()
     if (app.globalData.searchScene) {
       const scene = app.globalData.searchScene
@@ -86,10 +91,11 @@ Page({
   },
 
   async searchGuides() {
-    this.setData({ loading: true })
+    this.setData({ loading: true, errorMessage: '' })
     try {
       const params = {
         keyword: this.data.keyword,
+        contentType: this.data.contentType,
         page: this.data.page,
         pageSize: this.data.pageSize
       }
@@ -104,7 +110,19 @@ Page({
         noMore: newGuides.length >= result.total
       })
     } catch (err) {
-      util.showError(err)
+      const allFallback = sampleData.searchSampleGuides({
+        keyword: this.data.keyword,
+        scene: this.data.scene,
+        contentType: this.data.contentType
+      })
+      const start = (this.data.page - 1) * this.data.pageSize
+      const pageList = allFallback.slice(start, start + this.data.pageSize)
+      const newGuides = this.data.page === 1 ? pageList : [...this.data.guides, ...pageList]
+      this.setData({
+        guides: newGuides,
+        noMore: newGuides.length >= allFallback.length,
+        errorMessage: '云函数暂不可用，正在展示本地示例内容'
+      })
     } finally {
       this.setData({ loading: false })
     }

@@ -1,0 +1,20 @@
+{
+  "envId": "cloud1-d7gbglwc4912d7cab",
+  "functionRoot": "cloudfunctions",
+  "functions": [
+    {
+      "name": "init-data",
+      "timeout": 60,
+      "runtime": "Nodejs18.15",
+      "handler": "index.main",
+      "installDependency": true
+    },
+    {
+      "name": "guide",
+      "timeout": 60,
+      "runtime": "Nodejs18.15",
+      "handler": "index.main",
+      "installDependency": true
+    }
+  ]
+}

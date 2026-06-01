@@ -13,18 +13,17 @@ Page({
     errorMsg: '',
     showDoubaoTutorial: false,
     showTongyiTutorial: false,
-    doubaoTutorial: '',
-    tongyiTutorial: ''
+    doubaoTutorial: '<h2>豆包 API Key 获取步骤</h2><p>1. 访问火山引擎控制台</p><p>2. 注册并完成实名认证</p><p>3. 进入「豆包大模型」服务</p><p>4. 创建 API Key 并复制</p><p>注意：豆包提供充足的免费额度，适合个人开发者使用。</p>',
+    tongyiTutorial: '<h2>通义千问 API Key 获取步骤</h2><p>1. 访问阿里云控制台</p><p>2. 搜索「通义千问」服务</p><p>3. 开通服务并创建 API Key</p><p>4. 复制 API Key 到本应用</p><p>注意：通义千问视觉理解能力强，适合图片分析场景。</p>'
   },
 
   onLoad() {
     this.loadStatus();
-    this.loadTutorials();
   },
 
   async loadStatus() {
     try {
-      const status = await api.request({ url: '/api/user/api-key' });
+      const status = await api.user.getApiKeyStatus();
       this.setData({
         hasKey: status.hasKey,
         platformName: status.provider === 'doubao' ? '豆包' : status.provider === 'tongyi' ? '通义千问' : '',
@@ -33,31 +32,6 @@ Page({
     } catch (err) {
       console.error('加载状态失败', err);
     }
-  },
-
-  async loadTutorials() {
-    try {
-      const doubao = await api.request({ url: '/api/ai/tutorial/doubao' });
-      const tongyi = await api.request({ url: '/api/ai/tutorial/tongyi' });
-      this.setData({
-        doubaoTutorial: this.markdownToHtml(doubao),
-        tongyiTutorial: this.markdownToHtml(tongyi)
-      });
-    } catch (err) {
-      console.error('加载教程失败', err);
-    }
-  },
-
-  markdownToHtml(md) {
-    // 简单的 Markdown 转 HTML
-    return md
-      .replace(/# (.*)/g, '<h1>$1</h1>')
-      .replace(/## (.*)/g, '<h2>$1</h2>')
-      .replace(/### (.*)/g, '<h3>$1</h3>')
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
-      .replace(/\n/g, '<br/>');
   },
 
   selectPlatform(e) {
@@ -87,30 +61,7 @@ Page({
     this.setData({ verifying: true, errorMsg: '' });
 
     try {
-      // 先验证
-      const isValid = await api.request({
-        url: '/api/user/api-key/verify',
-        method: 'POST',
-        data: {
-          provider: this.data.selectedPlatform,
-          apiKey: this.data.apiKey
-        }
-      });
-
-      if (!isValid) {
-        this.setData({ errorMsg: 'API Key 验证失败，请检查后重试' });
-        return;
-      }
-
-      // 保存
-      await api.request({
-        url: '/api/user/api-key',
-        method: 'POST',
-        data: {
-          provider: this.data.selectedPlatform,
-          apiKey: this.data.apiKey
-        }
-      });
+      await api.user.saveApiKey(this.data.selectedPlatform, this.data.apiKey);
 
       util.showSuccess('配置成功');
       this.setData({
@@ -142,10 +93,7 @@ Page({
       success: async (res) => {
         if (res.confirm) {
           try {
-            await api.request({
-              url: '/api/user/api-key',
-              method: 'DELETE'
-            });
+            await api.user.deleteApiKey();
             util.showSuccess('已删除');
             this.loadStatus();
           } catch (err) {

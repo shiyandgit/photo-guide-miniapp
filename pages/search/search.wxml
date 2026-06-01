@@ -12,7 +12,7 @@
   <view wx:if="{{!keyword && !searched}}">
     <!-- 热门搜索 -->
     <view class="section" wx:if="{{hotKeywords.length > 0}}">
-      <view class="section-title">热门搜索</view>
+      <view class="section-title">🔥 热门搜索</view>
       <view class="tag-list">
         <view class="tag-item" wx:for="{{hotKeywords}}" wx:key="*this"
               bindtap="searchKeyword" data-keyword="{{item}}">
@@ -24,7 +24,7 @@
     <!-- 搜索历史 -->
     <view class="section" wx:if="{{searchHistory.length > 0}}">
       <view class="section-header">
-        <view class="section-title">搜索历史</view>
+        <view class="section-title">🐾 搜索历史</view>
         <view class="clear-btn" bindtap="clearHistory">清空</view>
       </view>
       <view class="tag-list">
@@ -43,19 +43,28 @@
     <view class="filter-item {{contentType === 2 ? 'active' : ''}}" bindtap="setContentType" data-type="2">应急技巧</view>
   </view>
 
+  <view class="notice" wx:if="{{errorMessage}}">
+    <text>{{errorMessage}}</text>
+  </view>
+
   <!-- 搜索结果 -->
   <view class="result-list" wx:if="{{searched}}">
-    <guide-card wx:for="{{guides}}" wx:key="_id" guide="{{item}}" bind:tap="goDetail" data-id="{{item._id}}" />
+    <!-- 首次搜索骨架屏 -->
+    <skeleton loading="{{loading && guides.length === 0}}" type="list" count="5" />
+
+    <block wx:if="{{guides.length > 0}}">
+      <guide-card wx:for="{{guides}}" wx:key="_id" guide="{{item}}" bind:tap="goDetail" data-id="{{item._id}}" />
+    </block>
 
     <!-- 加载更多 -->
-    <view class="loading" wx:if="{{loading}}">
+    <view class="loading" wx:if="{{loading && guides.length > 0}}">
       <text class="loading-text">加载中...</text>
     </view>
 
     <!-- 空数据 -->
     <view class="empty" wx:if="{{!loading && guides.length === 0}}">
-      <text class="empty-icon">🔍</text>
-      <text class="empty-text">未找到相关攻略</text>
+      <text class="empty-icon">🐱</text>
+      <text class="empty-text">没有找到呢，喵~</text>
     </view>
 
     <!-- 加载完成 -->

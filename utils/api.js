@@ -30,7 +30,10 @@ const callFunction = (name, action, data = {}) => {
 // 用户相关
 const user = {
   login: () => callFunction('user', 'login'),
-  getUserInfo: () => callFunction('user', 'getUserInfo')
+  getUserInfo: () => callFunction('user', 'getUserInfo'),
+  getApiKeyStatus: () => callFunction('user', 'getApiKeyStatus'),
+  saveApiKey: (provider, apiKey) => callFunction('user', 'saveApiKey', { provider, apiKey }),
+  deleteApiKey: () => callFunction('user', 'deleteApiKey')
 }
 
 // 攻略相关
@@ -41,7 +44,14 @@ const guide = {
   getMyFavorites: () => callFunction('guide', 'getMyFavorites'),
   toggleFavorite: (guideId) => callFunction('guide', 'toggleFavorite', { guideId }),
   getMyHistory: () => callFunction('guide', 'getMyHistory'),
-  addHistory: (guideId) => callFunction('guide', 'addHistory', { guideId })
+  addHistory: (guideId) => callFunction('guide', 'addHistory', { guideId }),
+  submitGuide: (data) => callFunction('guide', 'submitGuide', data),
+  updateGuide: (guideId, data) => callFunction('guide', 'updateGuide', { guideId, ...data }),
+  deleteGuide: (guideId) => callFunction('guide', 'deleteGuide', { guideId }),
+  getMyContributions: () => callFunction('guide', 'getMyContributions'),
+  getMyOpenId: () => callFunction('guide', 'getMyOpenId'),
+  adminGetAllGuides: () => callFunction('guide', 'adminGetAllGuides'),
+  adminDeleteGuide: (guideId) => callFunction('guide', 'deleteGuide', { guideId })
 }
 
 // AI分析相关

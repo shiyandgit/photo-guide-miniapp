@@ -27,7 +27,7 @@
     <view class="platform-list">
       <view class="platform-item {{selectedPlatform === 'doubao' ? 'active' : ''}}"
             bindtap="selectPlatform" data-platform="doubao">
-        <view class="platform-icon">🤖</view>
+        <view class="platform-icon">🐱</view>
         <view class="platform-info">
           <text class="platform-name">豆包</text>
           <text class="platform-desc">字节跳动旗下，免费额度充足</text>
@@ -35,7 +35,7 @@
       </view>
       <view class="platform-item {{selectedPlatform === 'tongyi' ? 'active' : ''}}"
             bindtap="selectPlatform" data-platform="tongyi">
-        <view class="platform-icon">🧠</view>
+        <view class="platform-icon">🐶</view>
         <view class="platform-info">
           <text class="platform-name">通义千问</text>
           <text class="platform-desc">阿里云旗下，视觉理解能力强</text>

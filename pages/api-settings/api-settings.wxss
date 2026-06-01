@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #F0F4F8;
   padding-bottom: 40rpx;
 }
 
@@ -115,8 +115,8 @@
 }
 
 .platform-item.active {
-  border-color: #FF6B6B;
-  background-color: rgba(255, 107, 107, 0.05);
+  border-color: #4A90D9;
+  background-color: rgba(74, 144, 217, 0.05);
 }
 
 .platform-icon {
@@ -158,8 +158,8 @@
 /* 按钮 */
 .btn-outline {
   background-color: #fff;
-  color: #FF6B6B;
-  border: 2rpx solid #FF6B6B;
+  color: #4A90D9;
+  border: 2rpx solid #4A90D9;
   border-radius: 44rpx;
   height: 88rpx;
   line-height: 88rpx;
@@ -217,7 +217,7 @@
 }
 
 .tutorial-item {
-  border-bottom: 1rpx solid #f5f5f5;
+  border-bottom: 1rpx solid #F0F4F8;
   padding: 20rpx 0;
 }
 
@@ -244,7 +244,7 @@
 .tutorial-content {
   margin-top: 20rpx;
   padding: 20rpx;
-  background-color: #f9f9f9;
+  background-color: #F0F4F8;
   border-radius: 12rpx;
   font-size: 26rpx;
   color: #666;

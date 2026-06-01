@@ -3,6 +3,8 @@ const util = require('../../utils/util')
 
 Page({
   data: {
+    editId: '',
+    editMode: false,
     title: '',
     contentType: 0,
     difficulty: 0,
@@ -20,6 +22,39 @@ Page({
       { name: '花海', selected: false }
     ],
     submitting: false
+  },
+
+  onLoad(options) {
+    if (options.id) {
+      this.setData({ editId: options.id, editMode: true })
+      wx.setNavigationBarTitle({ title: '编辑投稿' })
+      this.loadGuideForEdit(options.id)
+    }
+  },
+
+  async loadGuideForEdit(id) {
+    try {
+      util.showLoading('加载中...')
+      const guide = await api.guide.getDetail(id)
+      const sceneTags = this.data.sceneTags.map(tag => ({
+        ...tag,
+        selected: (guide.sceneTags || []).indexOf(tag.name) >= 0
+      }))
+      this.setData({
+        title: guide.title || '',
+        contentType: guide.contentType || 0,
+        difficulty: guide.difficulty || 0,
+        content: guide.content || '',
+        coverImage: guide.coverImage || '',
+        images: guide.images || [],
+        sceneTags
+      })
+    } catch (err) {
+      util.showError('加载攻略失败')
+      setTimeout(() => wx.navigateBack(), 1500)
+    } finally {
+      util.hideLoading()
+    }
   },
 
   onTitleInput(e) {
@@ -107,27 +142,58 @@ Page({
     this.setData({ submitting: true })
 
     try {
-      // 上传封面图
-      util.showLoading('上传图片中...')
-      const timestamp = Date.now()
-      const coverCloudPath = `guides/${timestamp}/cover.jpg`
-      const coverFileID = await api.uploadFile(this.data.coverImage, coverCloudPath)
-
-      // 上传配图
-      const imageFileIDs = []
-      for (let i = 0; i < this.data.images.length; i++) {
-        const imageCloudPath = `guides}/${timestamp}/image_${i}.jpg`
-        const fileID = await api.uploadFile(this.data.images[i], imageCloudPath)
-        imageFileIDs.push(fileID)
-      }
+      util.showLoading(this.data.editMode ? '保存中...' : '上传图片中...')
 
       // 获取选中的场景标签
       const sceneTags = this.data.sceneTags
         .filter(t => t.selected)
         .map(t => t.name)
 
-      // TODO: 需要添加提交攻略的云函数
-      util.showSuccess('提交成功')
+      // 判断是否需要上传新图片（本地临时路径需要上传，已有的云端 fileID 不需要）
+      let coverFileID = this.data.coverImage
+      if (this.data.coverImage.indexOf('tmp') >= 0 || this.data.coverImage.indexOf('temp') >= 0) {
+        const timestamp = Date.now()
+        coverFileID = await api.uploadFile(this.data.coverImage, `guides/${timestamp}/cover.jpg`)
+      }
+
+      const imageFileIDs = []
+      for (let i = 0; i < this.data.images.length; i++) {
+        const img = this.data.images[i]
+        if (img.indexOf('tmp') >= 0 || img.indexOf('temp') >= 0) {
+          const timestamp = Date.now()
+          const fileID = await api.uploadFile(img, `guides/${timestamp}/image_${i}.jpg`)
+          imageFileIDs.push(fileID)
+        } else {
+          imageFileIDs.push(img)
+        }
+      }
+
+      if (this.data.editMode) {
+        // 更新攻略
+        await api.guide.updateGuide(this.data.editId, {
+          title: this.data.title,
+          content: this.data.content,
+          contentType: this.data.contentType,
+          difficulty: this.data.difficulty,
+          coverImage: coverFileID,
+          images: imageFileIDs,
+          sceneTags
+        })
+        util.showSuccess('保存成功')
+      } else {
+        // 新建攻略
+        await api.guide.submitGuide({
+          title: this.data.title,
+          content: this.data.content,
+          contentType: this.data.contentType,
+          difficulty: this.data.difficulty,
+          coverImage: coverFileID,
+          images: imageFileIDs,
+          sceneTags
+        })
+        util.showSuccess('发布成功，攻略已可见')
+      }
+
       setTimeout(() => {
         wx.navigateBack()
       }, 1500)

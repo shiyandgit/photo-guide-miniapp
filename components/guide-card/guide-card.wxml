@@ -1,7 +1,11 @@
 <view class="guide-card" bindtap="onTap">
-  <image class="card-cover" src="{{guide.coverImage}}" mode="aspectFill" />
+  <image wx:if="{{guide.coverImage}}" class="card-cover" src="{{guide.coverImage}}" mode="aspectFill" />
+  <view wx:else class="card-cover card-cover-fallback" style="background: {{guide.coverColor || '#4A90D9'}};">
+    <text class="cover-scene">{{guide.scene}}</text>
+  </view>
   <view class="card-info">
     <text class="card-title">{{guide.title}}</text>
+    <text class="card-summary" wx:if="{{guide.summary}}">{{guide.summary}}</text>
     <view class="card-tags">
       <view class="card-tag {{guide.contentType === 1 ? 'tag-primary' : 'tag-orange'}}">
         {{guide.contentType === 1 ? '专业学习' : '应急技巧'}}

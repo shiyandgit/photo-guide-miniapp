@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #F0F4F8;
   padding-bottom: 140rpx;
 }
 
@@ -66,9 +66,9 @@
 }
 
 .radio-item.active {
-  border-color: #FF6B6B;
-  background-color: rgba(255, 107, 107, 0.1);
-  color: #FF6B6B;
+  border-color: #4A90D9;
+  background-color: rgba(74, 144, 217, 0.1);
+  color: #4A90D9;
 }
 
 /* 标签组 */
@@ -87,9 +87,9 @@
 }
 
 .tag-item.active {
-  border-color: #FF6B6B;
-  background-color: rgba(255, 107, 107, 0.1);
-  color: #FF6B6B;
+  border-color: #4A90D9;
+  background-color: rgba(74, 144, 217, 0.1);
+  color: #4A90D9;
 }
 
 /* 上传区域 */

@@ -1,11 +1,12 @@
 .container {
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #F0F4F8;
+  padding-bottom: 130rpx;
 }
 
 /* 用户卡片 */
 .user-card {
-  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+  background: linear-gradient(135deg, #4A90D9 0%, #7CB9E8 100%);
   padding: 60rpx 40rpx 40rpx;
 }
 
@@ -64,7 +65,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 30rpx;
-  border-bottom: 1rpx solid #f5f5f5;
+  border-bottom: 1rpx solid #F0F4F8;
 }
 
 .menu-item:last-child {
@@ -79,6 +80,37 @@
 .menu-icon {
   font-size: 36rpx;
   margin-right: 20rpx;
+}
+
+.menu-icon-box {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  margin-right: 20rpx;
+}
+
+.icon-pink {
+  background: linear-gradient(135deg, #FFE0E6 0%, #FFC1CC 100%);
+}
+
+.icon-blue {
+  background: linear-gradient(135deg, #E8F4FD 0%, #D0E8F9 100%);
+}
+
+.icon-green {
+  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+}
+
+.icon-purple {
+  background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+}
+
+.icon-orange {
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
 }
 
 .menu-text {
@@ -114,5 +146,5 @@
   padding: 30rpx;
   text-align: center;
   font-size: 30rpx;
-  color: #FF6B6B;
+  color: #4A90D9;
 }

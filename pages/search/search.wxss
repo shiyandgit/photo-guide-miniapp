@@ -1,11 +1,12 @@
 .container {
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #F0F4F8;
+  padding-bottom: 130rpx;
 }
 
 /* 搜索栏 */
 .search-header {
-  background-color: #FF6B6B;
+  background: linear-gradient(135deg, #4A90D9 0%, #7CB9E8 100%);
   padding: 20rpx;
   position: sticky;
   top: 0;
@@ -28,7 +29,7 @@
 }
 
 .search-btn {
-  background-color: #FF6B6B;
+  background-color: #4A90D9;
   color: #fff;
   padding: 12rpx 32rpx;
   border-radius: 32rpx;
@@ -69,7 +70,7 @@
 }
 
 .tag-item {
-  background-color: #f5f5f5;
+  background-color: #F0F4F8;
   padding: 12rpx 24rpx;
   border-radius: 30rpx;
   font-size: 26rpx;
@@ -92,8 +93,17 @@
 }
 
 .filter-item.active {
-  color: #FF6B6B;
-  border-bottom: 4rpx solid #FF6B6B;
+  color: #4A90D9;
+  border-bottom: 4rpx solid #4A90D9;
+}
+
+.notice {
+  margin: 0 20rpx 20rpx;
+  padding: 18rpx 22rpx;
+  border-radius: 12rpx;
+  color: #8a5a00;
+  background: #fff4d8;
+  font-size: 24rpx;
 }
 
 /* 结果列表 */

@@ -5,21 +5,21 @@
     "setting": {
         "urlCheck": true,
         "coverView": true,
-        "es6": false,
+        "es6": true,
         "postcss": true,
         "lazyloadPlaceholderEnable": false,
         "preloadBackgroundData": false,
-        "minified": true,
+        "minified": false,
         "autoAudits": false,
         "uglifyFileName": false,
         "uploadWithSourceMap": true,
-        "enhance": true,
+        "enhance": false,
         "useMultiFrameRuntime": true,
         "showShadowRootInWxmlPanel": true,
         "packNpmManually": false,
         "packNpmRelationList": [],
         "minifyWXSS": true,
-        "useStaticServer": true,
+        "useStaticServer": false,
         "showES6CompileOption": false,
         "checkInvalidKey": true,
         "babelSetting": {
@@ -29,11 +29,24 @@
         },
         "disableUseStrict": false,
         "useCompilerPlugins": false,
-        "minifyWXML": true,
-        "useIsolateContext": true,
-        "ignoreUploadUnusedFiles": true
+        "minifyWXML": false,
+        "useIsolateContext": false,
+        "ignoreUploadUnusedFiles": true,
+        "compileHotReLoad": false
     },
-    "condition": {},
+    "condition": {
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "首页",
+                    "pathName": "pages/index/index",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                }
+            ]
+        }
+    },
     "editorSetting": {
         "tabIndent": "insertSpaces",
         "tabSize": 4
@@ -44,5 +57,6 @@
         "ignore": [],
         "include": []
     },
-    "cloudfunctionTemplateRoot": "cloudfunctionTemplate/"
+    "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
+    "projectname": "photo-guide-miniapp"
 }

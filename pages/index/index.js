@@ -1,5 +1,6 @@
 const api = require('../../utils/api')
 const util = require('../../utils/util')
+const sampleData = require('../../utils/sample-data')
 
 Page({
   data: {
@@ -15,7 +16,9 @@ Page({
       { name: '花海', icon: '🌸' }
     ],
     hotGuides: [],
-    loading: false
+    loading: false,
+    initialLoading: true,
+    errorMessage: ''
   },
 
   onLoad() {
@@ -23,7 +26,9 @@ Page({
   },
 
   onShow() {
-    // 刷新数据
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({ selected: 0 })
+    }
   },
 
   onPullDownRefresh() {
@@ -33,17 +38,25 @@ Page({
   },
 
   async loadData() {
-    this.setData({ loading: true })
+    this.setData({ loading: true, errorMessage: '' })
     try {
       const hotGuides = await api.guide.getHot(10)
+      if (!hotGuides || hotGuides.length === 0) {
+        return
+      }
       this.setData({
-        hotGuides: hotGuides || [],
-        banners: (hotGuides || []).slice(0, 3)
+        hotGuides: hotGuides,
+        banners: hotGuides.slice(0, 3)
       })
     } catch (err) {
-      util.showError(err)
+      const fallbackGuides = sampleData.getSampleGuides(10)
+      this.setData({
+        hotGuides: fallbackGuides,
+        banners: fallbackGuides.slice(0, 3),
+        errorMessage: '云函数暂不可用，正在展示本地示例内容'
+      })
     } finally {
-      this.setData({ loading: false })
+      this.setData({ loading: false, initialLoading: false })
     }
   },
 

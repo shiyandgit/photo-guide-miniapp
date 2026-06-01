@@ -1,5 +1,6 @@
 const api = require('../../utils/api')
 const util = require('../../utils/util')
+const sampleData = require('../../utils/sample-data')
 
 Page({
   data: {
@@ -7,7 +8,8 @@ Page({
     sceneTags: [],
     styleTags: [],
     isFavorited: false,
-    loading: false
+    loading: false,
+    errorMessage: ''
   },
 
   onLoad(options) {
@@ -17,29 +19,38 @@ Page({
   },
 
   async loadGuide(id) {
-    this.setData({ loading: true })
+    this.setData({ loading: true, errorMessage: '' })
     try {
       const guide = await api.guide.getDetail(id)
-      const sceneTags = guide.sceneTags ? JSON.parse(guide.sceneTags) : []
-      const styleTags = guide.styleTags ? JSON.parse(guide.styleTags) : []
-
-      this.setData({
-        guide,
-        sceneTags,
-        styleTags,
-        isFavorited: guide.isFavorited || false
-      })
+      this.applyGuide(guide)
 
       // 添加浏览历史
       api.guide.addHistory(id)
-
-      // 设置标题
-      wx.setNavigationBarTitle({ title: guide.title })
     } catch (err) {
-      util.showError(err)
+      const guide = sampleData.findSampleGuide(id)
+      if (guide) {
+        this.applyGuide(guide, '云函数暂不可用，正在展示本地示例内容')
+      } else {
+        util.showError(err)
+      }
     } finally {
       this.setData({ loading: false })
     }
+  },
+
+  applyGuide(guide, errorMessage) {
+    const sceneTags = guide.sceneTags ? JSON.parse(guide.sceneTags) : []
+    const styleTags = guide.styleTags ? JSON.parse(guide.styleTags) : []
+
+    this.setData({
+      guide,
+      sceneTags,
+      styleTags,
+      isFavorited: guide.isFavorited || false,
+      errorMessage: errorMessage || ''
+    })
+
+    wx.setNavigationBarTitle({ title: guide.title })
   },
 
   previewCover() {

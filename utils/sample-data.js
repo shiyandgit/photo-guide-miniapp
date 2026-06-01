@@ -1,12 +1,4 @@
-const cloud = require('wx-server-sdk')
-
-cloud.init({
-  env: cloud.DYNAMIC_CURRENT_ENV
-})
-
-const db = cloud.database()
-
-const defaultGuides = [
+const sampleGuides = [
   {
     _id: 'sample-sunset',
     title: '海边日落拍照技巧',
@@ -20,7 +12,8 @@ const defaultGuides = [
     contentType: 1,
     difficulty: 1,
     viewCount: 256,
-    favoriteCount: 38
+    favoriteCount: 38,
+    status: 'approved'
   },
   {
     _id: 'sample-cafe',
@@ -35,7 +28,8 @@ const defaultGuides = [
     contentType: 1,
     difficulty: 2,
     viewCount: 189,
-    favoriteCount: 24
+    favoriteCount: 24,
+    status: 'approved'
   },
   {
     _id: 'sample-street',
@@ -50,7 +44,56 @@ const defaultGuides = [
     contentType: 1,
     difficulty: 3,
     viewCount: 342,
-    favoriteCount: 51
+    favoriteCount: 51,
+    status: 'approved'
+  },
+  {
+    _id: 'sample-ktv',
+    title: 'KTV 暗光氛围照',
+    summary: '借助屏幕光、彩色灯和动作感，避免拍成一片糊。',
+    content: '<p>KTV 光线弱，不要硬开闪光灯。可以让人物靠近<strong>屏幕、灯带或点歌台</strong>，用现场光补亮脸部。</p><p><strong>动作引导</strong>：让人物做唱歌、举杯、回头等动作，但快门不要太慢。手机可以连拍，多选表情自然的一张。</p><p><strong>后期处理</strong>：可以保留一点彩色噪点和高对比，让照片更像现场记录，而不是过度磨皮的棚拍。</p>',
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80',
+    coverColor: '#7E57C2',
+    scene: 'KTV',
+    sceneTags: '["KTV","暗光","聚会"]',
+    styleTags: '["霓虹","氛围感","夜景"]',
+    contentType: 2,
+    difficulty: 2,
+    viewCount: 148,
+    favoriteCount: 19,
+    status: 'approved'
+  },
+  {
+    _id: 'sample-restaurant',
+    title: '餐厅美食和人像一起拍',
+    summary: '先拍完整桌面，再抓夹菜、举杯和互动瞬间。',
+    content: '<p>餐厅拍照先找<strong>干净背景</strong>，避开杂乱的服务台和路人。食物上桌后先拍一张俯拍全景，记录桌面关系。</p><p><strong>人像入镜</strong>：不要只让人坐直看镜头，可以拍夹菜、举杯、递甜品这些动作，画面会自然很多。</p><p><strong>色彩调整</strong>：暖光餐厅容易偏黄，手机里可以稍微降低色温，食物颜色会更干净。</p>',
+    coverImage: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
+    coverColor: '#FFB74D',
+    scene: '餐厅',
+    sceneTags: '["餐厅","美食","聚餐"]',
+    styleTags: '["暖光","生活感","自然"]',
+    contentType: 2,
+    difficulty: 1,
+    viewCount: 203,
+    favoriteCount: 31,
+    status: 'approved'
+  },
+  {
+    _id: 'sample-flower',
+    title: '花海人像不俗套的拍法',
+    summary: '低机位、前景虚化和色彩控制，让花海照片不乱。',
+    content: '<p>花海最容易拍乱。建议选择<strong>颜色比较统一</strong>的一片区域，让人物衣服和花的颜色形成对比。</p><p><strong>拍摄角度</strong>：低机位可以让花朵填满前景，也能避开地面杂物。靠近一两朵花做虚化前景，画面会更有层次。</p><p><strong>动作引导</strong>：可以走动、回头、低头闻花，不必一直看镜头。表情越放松，照片越耐看。</p>',
+    coverImage: 'https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=800&q=80',
+    coverColor: '#EC407A',
+    scene: '花海',
+    sceneTags: '["花海","人像","户外"]',
+    styleTags: '["清新","自然","柔和"]',
+    contentType: 1,
+    difficulty: 2,
+    viewCount: 221,
+    favoriteCount: 44,
+    status: 'approved'
   },
   {
     _id: 'guide-citynight-001',
@@ -65,7 +108,8 @@ const defaultGuides = [
     contentType: 1,
     difficulty: 2,
     viewCount: 520,
-    favoriteCount: 87
+    favoriteCount: 87,
+    status: 'approved'
   },
   {
     _id: 'guide-rainstreet-002',
@@ -80,7 +124,8 @@ const defaultGuides = [
     contentType: 1,
     difficulty: 2,
     viewCount: 380,
-    favoriteCount: 62
+    favoriteCount: 62,
+    status: 'approved'
   },
   {
     _id: 'guide-bookstore-003',
@@ -95,7 +140,8 @@ const defaultGuides = [
     contentType: 1,
     difficulty: 1,
     viewCount: 410,
-    favoriteCount: 73
+    favoriteCount: 73,
+    status: 'approved'
   },
   {
     _id: 'guide-concert-004',
@@ -110,7 +156,8 @@ const defaultGuides = [
     contentType: 2,
     difficulty: 3,
     viewCount: 650,
-    favoriteCount: 112
+    favoriteCount: 112,
+    status: 'approved'
   },
   {
     _id: 'guide-picnic-005',
@@ -125,7 +172,8 @@ const defaultGuides = [
     contentType: 2,
     difficulty: 1,
     viewCount: 480,
-    favoriteCount: 95
+    favoriteCount: 95,
+    status: 'approved'
   },
   {
     _id: 'guide-snow-006',
@@ -140,7 +188,8 @@ const defaultGuides = [
     contentType: 2,
     difficulty: 2,
     viewCount: 380,
-    favoriteCount: 68
+    favoriteCount: 68,
+    status: 'approved'
   },
   {
     _id: 'guide-campus-007',
@@ -155,7 +204,8 @@ const defaultGuides = [
     contentType: 2,
     difficulty: 1,
     viewCount: 420,
-    favoriteCount: 89
+    favoriteCount: 89,
+    status: 'approved'
   },
   {
     _id: 'guide-chinese-008',
@@ -170,7 +220,8 @@ const defaultGuides = [
     contentType: 1,
     difficulty: 2,
     viewCount: 510,
-    favoriteCount: 102
+    favoriteCount: 102,
+    status: 'approved'
   },
   {
     _id: 'guide-pet-009',
@@ -185,7 +236,8 @@ const defaultGuides = [
     contentType: 1,
     difficulty: 2,
     viewCount: 580,
-    favoriteCount: 134
+    favoriteCount: 134,
+    status: 'approved'
   },
   {
     _id: 'guide-subway-010',
@@ -200,7 +252,8 @@ const defaultGuides = [
     contentType: 1,
     difficulty: 3,
     viewCount: 340,
-    favoriteCount: 71
+    favoriteCount: 71,
+    status: 'approved'
   },
   {
     _id: 'guide-rooftop-011',
@@ -215,7 +268,8 @@ const defaultGuides = [
     contentType: 2,
     difficulty: 2,
     viewCount: 460,
-    favoriteCount: 88
+    favoriteCount: 88,
+    status: 'approved'
   },
   {
     _id: 'guide-amusement-012',
@@ -230,7 +284,8 @@ const defaultGuides = [
     contentType: 2,
     difficulty: 2,
     viewCount: 520,
-    favoriteCount: 105
+    favoriteCount: 105,
+    status: 'approved'
   },
   {
     _id: 'guide-car-013',
@@ -245,7 +300,8 @@ const defaultGuides = [
     contentType: 1,
     difficulty: 1,
     viewCount: 390,
-    favoriteCount: 76
+    favoriteCount: 76,
+    status: 'approved'
   },
   {
     _id: 'guide-industrial-014',
@@ -260,7 +316,8 @@ const defaultGuides = [
     contentType: 1,
     difficulty: 3,
     viewCount: 310,
-    favoriteCount: 64
+    favoriteCount: 64,
+    status: 'approved'
   },
   {
     _id: 'guide-botanical-015',
@@ -275,7 +332,8 @@ const defaultGuides = [
     contentType: 2,
     difficulty: 1,
     viewCount: 440,
-    favoriteCount: 92
+    favoriteCount: 92,
+    status: 'approved'
   },
   {
     _id: 'emergency-backlight-001',
@@ -290,7 +348,8 @@ const defaultGuides = [
     contentType: 2,
     difficulty: 1,
     viewCount: 890,
-    favoriteCount: 234
+    favoriteCount: 234,
+    status: 'approved'
   },
   {
     _id: 'emergency-crowd-002',
@@ -305,7 +364,8 @@ const defaultGuides = [
     contentType: 2,
     difficulty: 1,
     viewCount: 760,
-    favoriteCount: 198
+    favoriteCount: 198,
+    status: 'approved'
   },
   {
     _id: 'emergency-dark-003',
@@ -320,7 +380,8 @@ const defaultGuides = [
     contentType: 2,
     difficulty: 1,
     viewCount: 680,
-    favoriteCount: 176
+    favoriteCount: 176,
+    status: 'approved'
   },
   {
     _id: 'guide-params-016',
@@ -335,39 +396,47 @@ const defaultGuides = [
     contentType: 1,
     difficulty: 1,
     viewCount: 1200,
-    favoriteCount: 356
+    favoriteCount: 356,
+    status: 'approved'
   }
 ]
 
-exports.main = async () => {
-  try {
-    let created = 0
+function getSampleGuides(limit) {
+  return sampleGuides.slice(0, limit || sampleGuides.length)
+}
 
-    for (let i = 0; i < defaultGuides.length; i++) {
-      const item = Object.assign({}, defaultGuides[i], {
-        images: defaultGuides[i].images || [],
-        status: 'approved',
-        authorId: 'system',
-        createTime: db.serverDate(),
-        updateTime: db.serverDate()
-      })
-      if (!item.coverImage) item.coverImage = ''
-      const id = item._id
-      delete item._id
+function findSampleGuide(id) {
+  return sampleGuides.find(item => item._id === id)
+}
 
-      await db.collection('guides').doc(id).set({ data: item })
-      created += 1
-    }
+function searchSampleGuides(params) {
+  const keyword = (params.keyword || '').trim()
+  const scene = params.scene || ''
+  const contentType = Number(params.contentType || 0)
 
-    return {
-      code: 200,
-      message: created > 0 ? '示例攻略初始化完成' : '示例攻略已存在',
-      data: { created }
-    }
-  } catch (err) {
-    return {
-      code: 500,
-      message: err.message
-    }
+  let list = sampleGuides.filter(item => item.status === 'approved')
+  if (scene) {
+    list = list.filter(item => item.scene === scene || item.sceneTags.indexOf(scene) >= 0)
   }
+  if (keyword) {
+    list = list.filter(item => {
+      return item.title.indexOf(keyword) >= 0 ||
+        item.summary.indexOf(keyword) >= 0 ||
+        item.scene.indexOf(keyword) >= 0 ||
+        item.sceneTags.indexOf(keyword) >= 0 ||
+        item.styleTags.indexOf(keyword) >= 0
+    })
+  }
+  if (contentType) {
+    list = list.filter(item => item.contentType === contentType)
+  }
+
+  return list
+}
+
+module.exports = {
+  sampleGuides,
+  getSampleGuides,
+  findSampleGuide,
+  searchSampleGuides
 }

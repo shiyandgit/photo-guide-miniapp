@@ -1,6 +1,6 @@
 <view class="container">
   <!-- 用户信息卡片 -->
-  <view class="user-card">
+  <view class="user-card" bindtap="showOpenId">
     <view class="user-info" wx:if="{{isLoggedIn}}">
       <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" />
       <view class="user-detail">
@@ -9,7 +9,18 @@
       </view>
     </view>
     <view class="login-btn" wx:else bindtap="login">
-      <text class="login-text">点击登录</text>
+      <text class="login-text">🐱 点击登录</text>
+    </view>
+  </view>
+
+  <!-- 管理后台（仅管理员可见） -->
+  <view class="menu-card" wx:if="{{isAdmin}}">
+    <view class="menu-item" bindtap="goPage" data-url="/pages/admin/admin">
+      <view class="menu-left">
+        <view class="menu-icon-box icon-orange">⚙️</view>
+        <text class="menu-text">管理后台</text>
+      </view>
+      <text class="menu-arrow">›</text>
     </view>
   </view>
 
@@ -17,7 +28,7 @@
   <view class="menu-card">
     <view class="menu-item" bindtap="goPage" data-url="/pages/my-favorites/my-favorites">
       <view class="menu-left">
-        <text class="menu-icon">❤️</text>
+        <view class="menu-icon-box icon-pink">🐱</view>
         <text class="menu-text">我的收藏</text>
       </view>
       <text class="menu-arrow">›</text>
@@ -25,7 +36,7 @@
 
     <view class="menu-item" bindtap="goPage" data-url="/pages/my-history/my-history">
       <view class="menu-left">
-        <text class="menu-icon">🕐</text>
+        <view class="menu-icon-box icon-blue">🐶</view>
         <text class="menu-text">浏览历史</text>
       </view>
       <text class="menu-arrow">›</text>
@@ -33,7 +44,7 @@
 
     <view class="menu-item" bindtap="goPage" data-url="/pages/my-contributions/my-contributions">
       <view class="menu-left">
-        <text class="menu-icon">📝</text>
+        <view class="menu-icon-box icon-green">🐾</view>
         <text class="menu-text">我的投稿</text>
       </view>
       <text class="menu-arrow">›</text>
@@ -41,7 +52,7 @@
 
     <view class="menu-item" bindtap="goPage" data-url="/pages/api-settings/api-settings">
       <view class="menu-left">
-        <text class="menu-icon">🔑</text>
+        <view class="menu-icon-box icon-purple">🔑</view>
         <text class="menu-text">API 密钥管理</text>
       </view>
       <view class="menu-right">
@@ -52,7 +63,7 @@
 
     <view class="menu-item" bindtap="goPage" data-url="/pages/ai-analyze/ai-analyze">
       <view class="menu-left">
-        <text class="menu-icon">🤖</text>
+        <view class="menu-icon-box icon-orange">🤖</view>
         <text class="menu-text">AI 评析记录</text>
       </view>
       <text class="menu-arrow">›</text>
@@ -63,7 +74,7 @@
   <view class="menu-card">
     <view class="menu-item" bindtap="showAbout">
       <view class="menu-left">
-        <text class="menu-icon">ℹ️</text>
+        <view class="menu-icon-box icon-blue">📷</view>
         <text class="menu-text">关于「摄影苦手」</text>
       </view>
       <text class="menu-arrow">›</text>

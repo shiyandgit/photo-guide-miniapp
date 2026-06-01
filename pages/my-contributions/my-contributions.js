@@ -21,8 +21,8 @@ Page({
   async loadContributions() {
     this.setData({ loading: true })
     try {
-      // TODO: 需要添加获取用户贡献的云函数
-      this.setData({ guides: [] })
+      const guides = await api.guide.getMyContributions()
+      this.setData({ guides })
     } catch (err) {
       util.showError(err)
     } finally {
@@ -35,6 +35,33 @@ Page({
     if (!id) return
     wx.navigateTo({
       url: `/pages/guide-detail/guide-detail?id=${id}`
+    })
+  },
+
+  editGuide(e) {
+    const id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/contribute/contribute?id=${id}`
+    })
+  },
+
+  deleteGuide(e) {
+    const id = e.currentTarget.dataset.id
+    const title = e.currentTarget.dataset.title
+    wx.showModal({
+      title: '确认删除',
+      content: `确定要删除「${title}」吗？删除后无法恢复。`,
+      confirmColor: '#f44336',
+      success: async (res) => {
+        if (!res.confirm) return
+        try {
+          await api.guide.deleteGuide(id)
+          util.showSuccess('已删除')
+          this.loadContributions()
+        } catch (err) {
+          util.showError(err)
+        }
+      }
     })
   },
 

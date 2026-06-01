@@ -1,6 +1,6 @@
 /* 全局样式 */
 page {
-  background-color: #F5F5F5;
+  background-color: #F0F4F8;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 28rpx;
   color: #333;
@@ -8,16 +8,16 @@ page {
 
 /* 主色调 */
 .text-primary {
-  color: #FF6B6B;
+  color: #4A90D9;
 }
 
 .bg-primary {
-  background-color: #FF6B6B;
+  background-color: #4A90D9;
 }
 
 /* 按钮样式 */
 .btn-primary {
-  background-color: #FF6B6B;
+  background-color: #4A90D9;
   color: #fff;
   border-radius: 44rpx;
   height: 88rpx;
@@ -49,8 +49,8 @@ page {
 }
 
 .tag-primary {
-  background-color: rgba(255, 107, 107, 0.1);
-  color: #FF6B6B;
+  background-color: rgba(74, 144, 217, 0.1);
+  color: #4A90D9;
 }
 
 .tag-orange {
@@ -94,4 +94,44 @@ page {
 /* 安全区域 */
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Q 版宠物装饰 */
+.pet-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E8F4FD 0%, #D0E8F9 100%);
+  font-size: 32rpx;
+  box-shadow: 0 4rpx 12rpx rgba(74, 144, 217, 0.15);
+}
+
+.pet-badge-sm {
+  width: 48rpx;
+  height: 48rpx;
+  font-size: 24rpx;
+}
+
+.pet-badge-lg {
+  width: 96rpx;
+  height: 96rpx;
+  font-size: 48rpx;
+}
+
+/* 蓝色渐变背景 */
+.bg-blue-gradient {
+  background: linear-gradient(135deg, #4A90D9 0%, #7CB9E8 100%);
+}
+
+/* 蓝色描边 */
+.border-blue {
+  border: 2rpx solid rgba(74, 144, 217, 0.3);
+}
+
+/* 蓝色阴影 */
+.shadow-blue {
+  box-shadow: 0 4rpx 16rpx rgba(74, 144, 217, 0.12);
 }
