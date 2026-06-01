@@ -1,0 +1,41 @@
+<view class="container">
+  <view class="guide-page" wx:if="{{!hasApiKey}}">
+    <view class="guide-illustration">🐱</view>
+    <view class="guide-title">AI 照片评析</view>
+    <view class="guide-desc">AI 评析需要您配置自己的 API Key，就像打印机需要自己的墨盒～</view>
+    <view class="guide-tip">系统不收费，使用您自己的 API Key 完全免费</view>
+    <button class="btn-primary" bindtap="goApiSettings">去配置 API Key</button>
+  </view>
+  <view class="analyze-page" wx:else>
+    <view class="status-bar">
+      <view class="platform-info">
+        <text class="platform-label">当前平台：</text>
+        <text class="platform-name">{{platformName}}</text>
+      </view>
+      <view class="settings-link" bindtap="goApiSettings">API 设置</view>
+    </view>
+    <view class="photo-section" bindtap="choosePhoto">
+      <view wx:if="{{!photoPath}}" class="photo-placeholder">
+        <view class="photo-icon">🐶</view>
+        <text class="photo-text">点击选择照片</text>
+        <text class="photo-tip">支持从相册选择或拍照</text>
+      </view>
+      <image wx:else src="{{photoPath}}" mode="aspectFill" class="photo-preview" />
+    </view>
+    <view class="rechoose" wx:if="{{photoPath}}" bindtap="choosePhoto">重新选择照片</view>
+    <button class="btn-primary analyze-btn" bindtap="startAnalysis" disabled="{{!photoPath || analyzing}}" loading="{{analyzing}}">{{analyzing ? 'AI 分析中...' : '开始分析'}}</button>
+    <view class="result-section" wx:if="{{result}}">
+      <view class="result-tabs">
+        <view class="result-tab {{currentTab === 'suggestion' ? 'active' : ''}}" bindtap="switchTab" data-tab="suggestion">拍摄建议</view>
+        <view class="result-tab {{currentTab === 'prompt' ? 'active' : ''}}" bindtap="switchTab" data-tab="prompt">P图提示词</view>
+      </view>
+      <view class="result-content" wx:if="{{currentTab === 'suggestion'}}"><view class="result-text">{{result.suggestionText}}</view></view>
+      <view class="result-content" wx:if="{{currentTab === 'prompt'}}">
+        <view class="result-text">{{result.promptText}}</view>
+        <button class="copy-btn" bindtap="copyPrompt">一键复制</button>
+      </view>
+      <view class="result-model">使用模型：{{result.aiModel}}</view>
+    </view>
+    <view class="history-link" bindtap="goHistory">🐾 查看分析历史</view>
+  </view>
+</view>

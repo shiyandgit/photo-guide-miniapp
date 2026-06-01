@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "skeleton": "/components/skeleton/index",
+    "guide-card": "/components/guide-card/guide-card"
+  }
+}

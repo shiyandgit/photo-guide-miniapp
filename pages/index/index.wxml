@@ -1,0 +1,56 @@
+<view class="container">
+  <skeleton loading="{{initialLoading}}" type="home" />
+  <view class="search-bar" bindtap="goSearch" wx:if="{{!initialLoading}}">
+    <view class="brand-row">
+      <text class="brand-emoji">🐱</text>
+      <text class="brand-text">摄影苦手 · 拍出好照片</text>
+    </view>
+    <view class="search-input">
+      <text class="search-icon">🔍</text>
+      <text class="search-placeholder">搜索拍照攻略...</text>
+    </view>
+  </view>
+  <swiper class="banner" indicator-dots autoplay circular interval="{{3000}}" wx:if="{{!initialLoading && banners.length > 0}}">
+    <swiper-item wx:for="{{banners}}" wx:key="_id" bindtap="goDetail" data-id="{{item._id}}">
+      <image wx:if="{{item.coverImage}}" src="{{item.coverImage}}" mode="aspectFill" class="banner-image" />
+      <view wx:else class="banner-fallback" style="background: {{item.coverColor || '#4A90D9'}};">
+        <view class="banner-kicker">{{item.scene}}</view>
+        <view class="banner-title">{{item.title}}</view>
+        <view class="banner-summary">{{item.summary}}</view>
+      </view>
+    </swiper-item>
+  </swiper>
+  <view class="notice" wx:if="{{errorMessage && !initialLoading}}">
+    <text>{{errorMessage}}</text>
+  </view>
+  <view class="section" wx:if="{{!initialLoading}}">
+    <view class="section-header">
+      <text class="section-title">场景分类</text>
+      <view class="section-pet">🐱</view>
+    </view>
+    <view class="scene-grid">
+      <view class="scene-item" wx:for="{{scenes}}" wx:key="name" bindtap="goSceneSearch" data-scene="{{item.name}}">
+        <view class="scene-icon">{{item.icon}}</view>
+        <text class="scene-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="section" wx:if="{{!initialLoading}}">
+    <view class="section-header">
+      <text class="section-title">热门攻略</text>
+      <view class="section-pet">🐶</view>
+    </view>
+    <view class="guide-list">
+      <guide-card wx:for="{{hotGuides}}" wx:key="_id" guide="{{item}}" bind:tap="goDetail" data-id="{{item._id}}" />
+    </view>
+  </view>
+  <view class="loading" wx:if="{{loading && !initialLoading}}">
+    <view class="loading-icon">🐾</view>
+    <text class="loading-text">加载中...</text>
+  </view>
+  <view class="empty" wx:if="{{!loading && !initialLoading && hotGuides.length === 0}}">
+    <text class="empty-icon">🐱</text>
+    <text class="empty-text">暂无攻略，喵~</text>
+    <button class="empty-btn" bindtap="loadData">重新加载</button>
+  </view>
+</view>

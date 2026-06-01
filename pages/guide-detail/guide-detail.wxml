@@ -1,0 +1,57 @@
+<view class="container">
+  <skeleton loading="{{loading && !guide._id}}" type="detail" />
+  <view class="cover-wrapper" wx:if="{{guide._id}}">
+    <image wx:if="{{guide.coverImage}}" class="cover-image" src="{{guide.coverImage}}" mode="aspectFill" bindtap="previewCover" />
+    <view wx:else class="cover-image cover-fallback" style="background: {{guide.coverColor || '#4A90D9'}};">
+      <text class="cover-scene">{{guide.scene}}</text>
+      <text class="cover-title">{{guide.title}}</text>
+    </view>
+  </view>
+  <view class="notice" wx:if="{{errorMessage && guide._id}}"><text>{{errorMessage}}</text></view>
+  <view class="info-card" wx:if="{{guide._id}}">
+    <view class="title">{{guide.title}}</view>
+    <view class="summary" wx:if="{{guide.summary}}">{{guide.summary}}</view>
+    <view class="tags">
+      <view class="tag {{guide.contentType === 1 ? 'tag-primary' : 'tag-orange'}}">{{guide.contentType === 1 ? '专业学习' : '应急技巧'}}</view>
+      <view class="tag tag-blue" wx:if="{{guide.difficulty === 1}}">新手入门</view>
+      <view class="tag tag-green" wx:if="{{guide.difficulty === 2}}">进阶技巧</view>
+      <view class="tag tag-primary" wx:if="{{guide.difficulty === 3}}">专业玩法</view>
+    </view>
+    <scroll-view scroll-x class="tag-scroll" wx:if="{{sceneTags.length > 0 || styleTags.length > 0}}">
+      <view class="tag-list">
+        <view class="tag tag-outline" wx:for="{{sceneTags}}" wx:key="*this">{{item}}</view>
+        <view class="tag tag-outline" wx:for="{{styleTags}}" wx:key="*this">{{item}}</view>
+      </view>
+    </scroll-view>
+    <view class="meta">
+      <view class="author" wx:if="{{guide.authorNickname}}">
+        <image class="author-avatar" src="{{guide.authorAvatarUrl}}" wx:if="{{guide.authorAvatarUrl}}" />
+        <text class="author-name">{{guide.authorNickname}}</text>
+      </view>
+      <view class="stats">
+        <text class="stat-item">👁️ {{guide.viewCount || 0}}</text>
+        <text class="stat-item">❤️ {{guide.favoriteCount || 0}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="content-card" wx:if="{{guide._id}}">
+    <view class="content-title">📖 攻略详情</view>
+    <rich-text class="content-body" nodes="{{guide.content}}" />
+  </view>
+  <view class="images-card" wx:if="{{guide._id && guide.images && guide.images.length > 0}}">
+    <view class="content-title">🖼️ 参考图片</view>
+    <view class="image-grid">
+      <image wx:for="{{guide.images}}" wx:key="*this" src="{{item}}" mode="aspectFill" class="grid-image" bindtap="previewImage" data-url="{{item}}" />
+    </view>
+  </view>
+  <view class="bottom-bar safe-area-bottom" wx:if="{{guide._id}}">
+    <view class="action-btn {{isFavorited ? 'favorited' : ''}}" bindtap="toggleFavorite">
+      <text class="action-icon">{{isFavorited ? '❤️' : '🤍'}}</text>
+      <text class="action-text">{{isFavorited ? '已收藏' : '收藏'}}</text>
+    </view>
+    <button class="action-btn share-btn" open-type="share">
+      <text class="action-icon">📤</text>
+      <text class="action-text">分享</text>
+    </button>
+  </view>
+</view>
