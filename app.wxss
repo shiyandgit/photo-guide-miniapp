@@ -1,0 +1,59 @@
+/* 全局样式 */
+page {
+  background-color: #F0F4F8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.text-primary { color: #4A90D9; }
+.bg-primary { background-color: #4A90D9; }
+
+.btn-primary {
+  background-color: #4A90D9;
+  color: #fff;
+  border-radius: 44rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  border: none;
+}
+.btn-primary::after { border: none; }
+
+.card {
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin: 20rpx;
+  padding: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+
+.tag {
+  display: inline-block;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  margin-right: 12rpx;
+}
+.tag-primary { background-color: rgba(74, 144, 217, 0.1); color: #4A90D9; }
+.tag-orange { background-color: rgba(255, 152, 0, 0.1); color: #FF9800; }
+.tag-green { background-color: rgba(76, 175, 80, 0.1); color: #4CAF50; }
+.tag-blue { background-color: rgba(33, 150, 243, 0.1); color: #2196F3; }
+
+.loading { display: flex; justify-content: center; align-items: center; padding: 40rpx; }
+.empty { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100rpx 40rpx; }
+.empty-text { color: #999; font-size: 28rpx; margin-top: 20rpx; }
+.safe-area-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+.pet-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 64rpx; height: 64rpx; border-radius: 50%;
+  background: linear-gradient(135deg, #E8F4FD 0%, #D0E8F9 100%);
+  font-size: 32rpx; box-shadow: 0 4rpx 12rpx rgba(74, 144, 217, 0.15);
+}
+.pet-badge-sm { width: 48rpx; height: 48rpx; font-size: 24rpx; }
+.pet-badge-lg { width: 96rpx; height: 96rpx; font-size: 48rpx; }
+
+.bg-blue-gradient { background: linear-gradient(135deg, #4A90D9 0%, #7CB9E8 100%); }
+.border-blue { border: 2rpx solid rgba(74, 144, 217, 0.3); }
+.shadow-blue { box-shadow: 0 4rpx 16rpx rgba(74, 144, 217, 0.12); }

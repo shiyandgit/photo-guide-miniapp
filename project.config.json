@@ -1,0 +1,44 @@
+{
+    "appid": "wxc039216e3539c35e",
+    "compileType": "miniprogram",
+    "cloudfunctionRoot": "cloudfunctions/",
+    "setting": {
+        "urlCheck": true,
+        "coverView": true,
+        "es6": true,
+        "postcss": true,
+        "lazyloadPlaceholderEnable": false,
+        "preloadBackgroundData": false,
+        "minified": false,
+        "autoAudits": false,
+        "uglifyFileName": false,
+        "uploadWithSourceMap": true,
+        "enhance": false,
+        "useMultiFrameRuntime": true,
+        "showShadowRootInWxmlPanel": true,
+        "packNpmManually": false,
+        "packNpmRelationList": [],
+        "minifyWXSS": true,
+        "useStaticServer": false,
+        "showES6CompileOption": false,
+        "checkInvalidKey": true,
+        "babelSetting": { "ignore": [], "disablePlugins": [], "outputPath": "" },
+        "disableUseStrict": false,
+        "useCompilerPlugins": false,
+        "minifyWXML": false,
+        "useIsolateContext": false,
+        "ignoreUploadUnusedFiles": true,
+        "compileHotReLoad": false
+    },
+    "condition": {
+        "miniprogram": {
+            "list": [{ "name": "首页", "pathName": "pages/index/index", "query": "", "launchMode": "default", "scene": null }]
+        }
+    },
+    "editorSetting": { "tabIndent": "insertSpaces", "tabSize": 4 },
+    "description": "项目配置文件",
+    "libVersion": "3.15.2",
+    "packOptions": { "ignore": [], "include": [] },
+    "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
+    "projectname": "photo-guide-miniapp"
+}
