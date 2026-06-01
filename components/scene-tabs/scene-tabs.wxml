@@ -1,0 +1,11 @@
+<scroll-view scroll-x class="scene-tabs">
+  <view class="tab-list">
+    <view class="tab-item {{selected === '' ? 'active' : ''}}" bindtap="select" data-scene="">
+      全部
+    </view>
+    <view class="tab-item {{selected === item ? 'active' : ''}}" wx:for="{{scenes}}" wx:key="*this"
+          bindtap="select" data-scene="{{item}}">
+      {{item}}
+    </view>
+  </view>
+</scroll-view>

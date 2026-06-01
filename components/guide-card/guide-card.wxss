@@ -1,0 +1,20 @@
+.guide-card {
+  display: flex;
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+.card-cover { width: 240rpx; height: 180rpx; flex-shrink: 0; }
+.card-cover-fallback { display: flex; align-items: flex-end; box-sizing: border-box; padding: 18rpx; }
+.cover-scene { color: #fff; font-size: 26rpx; font-weight: 700; }
+.card-info { flex: 1; padding: 20rpx; display: flex; flex-direction: column; justify-content: space-between; }
+.card-title { font-size: 30rpx; font-weight: bold; color: #333; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; line-height: 1.4; }
+.card-summary { margin-top: 8rpx; color: #777; font-size: 24rpx; line-height: 1.4; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.card-tags { margin-top: 12rpx; }
+.card-tag { display: inline-block; padding: 4rpx 16rpx; border-radius: 20rpx; font-size: 22rpx; }
+.tag-primary { background-color: rgba(74, 144, 217, 0.1); color: #4A90D9; }
+.tag-orange { background-color: rgba(255, 152, 0, 0.1); color: #FF9800; }
+.card-meta { margin-top: 12rpx; display: flex; align-items: center; }
+.card-stat { font-size: 24rpx; color: #999; }
