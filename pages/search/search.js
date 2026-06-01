@@ -35,7 +35,7 @@ Page({
     if (app.globalData.searchScene) {
       const scene = app.globalData.searchScene
       app.globalData.searchScene = null
-      this.setData({ scene, keyword: scene })
+      this.setData({ scene: scene, keyword: scene })
       this.doSearch()
     }
   },
@@ -43,7 +43,9 @@ Page({
   onPullDownRefresh() {
     if (this.data.searched) {
       this.setData({ page: 1, guides: [], noMore: false })
-      this.searchGuides().then(() => { wx.stopPullDownRefresh() })
+      this.searchGuides().then(() => {
+        wx.stopPullDownRefresh()
+      })
     } else {
       wx.stopPullDownRefresh()
     }
@@ -56,10 +58,13 @@ Page({
     }
   },
 
-  onInput(e) { this.setData({ keyword: e.detail.value }) },
+  onInput(e) {
+    this.setData({ keyword: e.detail.value })
+  },
 
   doSearch() {
     if (!this.data.keyword.trim()) return
+    // 保存搜索历史
     const history = this.data.searchHistory.filter(k => k !== this.data.keyword)
     history.unshift(this.data.keyword)
     const newHistory = history.slice(0, 10)
@@ -94,11 +99,16 @@ Page({
         page: this.data.page,
         pageSize: this.data.pageSize
       }
-      if (this.data.scene) params.scene = this.data.scene
+      if (this.data.scene) {
+        params.scene = this.data.scene
+      }
 
       const result = await api.guide.search(params)
       const newGuides = this.data.page === 1 ? result.list : [...this.data.guides, ...result.list]
-      this.setData({ guides: newGuides, noMore: newGuides.length >= result.total })
+      this.setData({
+        guides: newGuides,
+        noMore: newGuides.length >= result.total
+      })
     } catch (err) {
       const allFallback = sampleData.searchSampleGuides({
         keyword: this.data.keyword,
@@ -121,6 +131,8 @@ Page({
   goDetail(e) {
     const id = e.detail.id || e.currentTarget.dataset.id
     if (!id) return
-    wx.navigateTo({ url: `/pages/guide-detail/guide-detail?id=${id}` })
+    wx.navigateTo({
+      url: `/pages/guide-detail/guide-detail?id=${id}`
+    })
   }
 })

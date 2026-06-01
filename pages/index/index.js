@@ -21,7 +21,9 @@ Page({
     errorMessage: ''
   },
 
-  onLoad() { this.loadData() },
+  onLoad() {
+    this.loadData()
+  },
 
   onShow() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
@@ -30,15 +32,22 @@ Page({
   },
 
   onPullDownRefresh() {
-    this.loadData().then(() => { wx.stopPullDownRefresh() })
+    this.loadData().then(() => {
+      wx.stopPullDownRefresh()
+    })
   },
 
   async loadData() {
     this.setData({ loading: true, errorMessage: '' })
     try {
       const hotGuides = await api.guide.getHot(10)
-      if (!hotGuides || hotGuides.length === 0) return
-      this.setData({ hotGuides, banners: hotGuides.slice(0, 3) })
+      if (!hotGuides || hotGuides.length === 0) {
+        return
+      }
+      this.setData({
+        hotGuides: hotGuides,
+        banners: hotGuides.slice(0, 3)
+      })
     } catch (err) {
       const fallbackGuides = sampleData.getSampleGuides(10)
       this.setData({
@@ -51,7 +60,9 @@ Page({
     }
   },
 
-  goSearch() { wx.switchTab({ url: '/pages/search/search' }) },
+  goSearch() {
+    wx.switchTab({ url: '/pages/search/search' })
+  },
 
   goSceneSearch(e) {
     const scene = e.currentTarget.dataset.scene
@@ -63,6 +74,8 @@ Page({
   goDetail(e) {
     const id = e.detail.id || e.currentTarget.dataset.id
     if (!id) return
-    wx.navigateTo({ url: `/pages/guide-detail/guide-detail?id=${id}` })
+    wx.navigateTo({
+      url: `/pages/guide-detail/guide-detail?id=${id}`
+    })
   }
 })

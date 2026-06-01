@@ -1,31 +1,211 @@
-.container { padding-bottom: 130rpx; }
-.search-bar { padding: 24rpx 24rpx 28rpx; background: linear-gradient(135deg, #4A90D9 0%, #7CB9E8 100%); }
-.brand-row { display: flex; align-items: center; margin-bottom: 18rpx; }
-.brand-emoji { font-size: 36rpx; margin-right: 10rpx; }
-.brand-text { font-size: 26rpx; color: rgba(255, 255, 255, 0.9); font-weight: 500; }
-.search-input { display: flex; align-items: center; background-color: #fff; border-radius: 40rpx; padding: 18rpx 28rpx; box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06); }
-.search-icon { margin-right: 12rpx; font-size: 28rpx; }
-.search-placeholder { color: #999; font-size: 28rpx; }
-.banner { height: 320rpx; margin: 20rpx; border-radius: 16rpx; overflow: hidden; }
-.banner-image { width: 100%; height: 100%; }
-.banner-fallback { width: 100%; height: 100%; box-sizing: border-box; padding: 44rpx 40rpx; color: #fff; display: flex; flex-direction: column; justify-content: flex-end; }
-.banner-kicker { font-size: 24rpx; opacity: 0.85; margin-bottom: 12rpx; }
-.banner-title { font-size: 42rpx; font-weight: 700; line-height: 1.2; margin-bottom: 12rpx; }
-.banner-summary { font-size: 26rpx; line-height: 1.5; opacity: 0.92; }
-.notice { margin: 0 20rpx 20rpx; padding: 18rpx 22rpx; border-radius: 12rpx; color: #8a5a00; background: #fff4d8; font-size: 24rpx; }
-.section { margin: 20rpx 0; }
-.section-header { display: flex; align-items: center; padding: 0 20rpx; margin-bottom: 20rpx; }
-.section-title { font-size: 32rpx; font-weight: bold; }
-.section-pet { display: inline-flex; align-items: center; justify-content: center; width: 48rpx; height: 48rpx; border-radius: 50%; background: linear-gradient(135deg, #E8F4FD 0%, #D0E8F9 100%); font-size: 24rpx; margin-left: 12rpx; }
-.scene-grid { display: flex; flex-wrap: wrap; padding: 0 10rpx; }
-.scene-item { width: 25%; display: flex; flex-direction: column; align-items: center; padding: 20rpx 0; }
-.scene-icon { font-size: 48rpx; margin-bottom: 8rpx; display: flex; align-items: center; justify-content: center; width: 88rpx; height: 88rpx; border-radius: 50%; background: linear-gradient(135deg, #E8F4FD 0%, #D0E8F9 100%); box-shadow: 0 4rpx 12rpx rgba(74, 144, 217, 0.12); }
-.scene-name { font-size: 24rpx; color: #666; }
-.guide-list { padding: 0 10rpx; }
-.loading { display: flex; justify-content: center; align-items: center; padding: 40rpx; }
-.loading-icon { font-size: 32rpx; margin-right: 12rpx; }
-.loading-text { color: #999; font-size: 28rpx; }
-.empty { display: flex; flex-direction: column; align-items: center; padding: 100rpx 0; }
-.empty-icon { font-size: 80rpx; margin-bottom: 20rpx; }
-.empty-text { color: #999; font-size: 28rpx; }
-.empty-btn { margin-top: 28rpx; height: 72rpx; line-height: 72rpx; padding: 0 36rpx; border-radius: 36rpx; background: #4A90D9; color: #fff; font-size: 26rpx; }
+.container {
+  padding-bottom: 130rpx;
+}
+
+/* 搜索栏 */
+.search-bar {
+  padding: 24rpx 24rpx 28rpx;
+  background: linear-gradient(135deg, #4A90D9 0%, #7CB9E8 100%);
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18rpx;
+}
+
+.brand-emoji {
+  font-size: 36rpx;
+  margin-right: 10rpx;
+}
+
+.brand-text {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 40rpx;
+  padding: 18rpx 28rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.search-icon {
+  margin-right: 12rpx;
+  font-size: 28rpx;
+}
+
+.search-placeholder {
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* Banner 轮播 */
+.banner {
+  height: 320rpx;
+  margin: 20rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+}
+
+.banner-fallback {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 44rpx 40rpx;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.banner-kicker {
+  font-size: 24rpx;
+  opacity: 0.85;
+  margin-bottom: 12rpx;
+}
+
+.banner-title {
+  font-size: 42rpx;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 12rpx;
+}
+
+.banner-summary {
+  font-size: 26rpx;
+  line-height: 1.5;
+  opacity: 0.92;
+}
+
+.notice {
+  margin: 0 20rpx 20rpx;
+  padding: 18rpx 22rpx;
+  border-radius: 12rpx;
+  color: #8a5a00;
+  background: #fff4d8;
+  font-size: 24rpx;
+}
+
+/* 区块标题 */
+.section {
+  margin: 20rpx 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.section-pet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E8F4FD 0%, #D0E8F9 100%);
+  font-size: 24rpx;
+  margin-left: 12rpx;
+}
+
+/* 场景网格 */
+.scene-grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 10rpx;
+}
+
+.scene-item {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.scene-icon {
+  font-size: 48rpx;
+  margin-bottom: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E8F4FD 0%, #D0E8F9 100%);
+  box-shadow: 0 4rpx 12rpx rgba(74, 144, 217, 0.12);
+}
+
+.scene-name {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 攻略列表 */
+.guide-list {
+  padding: 0 10rpx;
+}
+
+/* 加载中 */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40rpx;
+}
+
+.loading-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.loading-text {
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 空数据 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100rpx 0;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  color: #999;
+  font-size: 28rpx;
+}
+
+.empty-btn {
+  margin-top: 28rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  padding: 0 36rpx;
+  border-radius: 36rpx;
+  background: #4A90D9;
+  color: #fff;
+  font-size: 26rpx;
+}
